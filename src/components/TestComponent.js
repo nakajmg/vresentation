@@ -6,5 +6,5 @@ export default {
     },
   },
   functional: true,
-  render: (h, context) => (<div>{context.props.text}</div>)
+  render: (h, context) => <div>{context.props.text}</div>,
 }

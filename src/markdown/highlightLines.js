@@ -20,27 +20,27 @@ export default md => {
       .split(',')
       .map(v => v.split('-').map(v => parseInt(v, 10)))
 
-    const code = options.highlight
-      ? options.highlight(token.content, langName)
-      : token.content
+    const code = options.highlight ? options.highlight(token.content, langName) : token.content
 
     const rawCode = code.replace(wrapperRE, '')
-    const highlightLinesCode = rawCode.split('\n').map((split, index) => {
-      const lineNumber = index + 1
-      const inRange = lineNumbers.some(([start, end]) => {
-        if (start && end) {
-          return lineNumber >= start && lineNumber <= end
+    const highlightLinesCode = rawCode
+      .split('\n')
+      .map((split, index) => {
+        const lineNumber = index + 1
+        const inRange = lineNumbers.some(([start, end]) => {
+          if (start && end) {
+            return lineNumber >= start && lineNumber <= end
+          }
+          return lineNumber === start
+        })
+        if (inRange) {
+          return `<div class="highlighted">&nbsp;</div>`
         }
-        return lineNumber === start
+        return '<br>'
       })
-      if (inRange) {
-        return `<div class="highlighted">&nbsp;</div>`
-      }
-      return '<br>'
-    }).join('')
+      .join('')
 
-    const highlightLinesWrapperCode =
-      `<div class="highlight-lines">${highlightLinesCode}</div>`
+    const highlightLinesWrapperCode = `<div class="highlight-lines">${highlightLinesCode}</div>`
 
     return highlightLinesWrapperCode + code
   }

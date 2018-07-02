@@ -22,13 +22,13 @@ export default {
   render(h) {
     return (
       <section class="wrapper">
-        {
-          this.isStartPage
-            ? <TitlePage class="titlepage" meta={this.meta}/>
-            : <ContentPage content={this.content}/>
-        }
-        <PageNavigator length={this.contentsLength} page={this.page}/>
-        <PagePositionBar length={this.contentsLength} page={this.page}/>
+        {this.isStartPage ? (
+          <TitlePage class="titlepage" meta={this.meta} />
+        ) : (
+          <ContentPage content={this.content} />
+        )}
+        <PageNavigator length={this.contentsLength} page={this.page} />
+        <PagePositionBar length={this.contentsLength} page={this.page} />
       </section>
     )
   },
@@ -52,7 +52,10 @@ export default {
       .then(md => {
         const mdit = MD()
         const parsed = frontmatter(md)
-        const contents = mdit.render(parsed.content).split('<hr>').map(content => content)
+        const contents = mdit
+          .render(parsed.content)
+          .split('<hr>')
+          .map(content => content)
         this.meta = parsed.data
         this.contents = contents
       })
@@ -61,9 +64,10 @@ export default {
 </script>
 
 <style lang="stylus">
-.wrapper
-  height 100%
-  margin 0
-  position relative
-  user-select none
+.wrapper {
+  height: 100%;
+  margin: 0;
+  position: relative;
+  user-select: none;
+}
 </style>

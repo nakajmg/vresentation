@@ -2,17 +2,14 @@ export default md => {
   const fence = md.renderer.rules.fence
   md.renderer.rules.fence = (...args) => {
     const rawCode = fence(...args)
-    const code = rawCode.slice(
-      rawCode.indexOf('<code>'),
-      rawCode.indexOf('</code>')
-    )
+    const code = rawCode.slice(rawCode.indexOf('<code>'), rawCode.indexOf('</code>'))
 
     const lines = code.split('\n')
     const lineNumbersCode = [...Array(lines.length - 1)]
-      .map((line, index) => `<span class="line-number">${index + 1}</span><br>`).join('')
+      .map((line, index) => `<span class="line-number">${index + 1}</span><br>`)
+      .join('')
 
-    const lineNumbersWrapperCode =
-      `<div class="line-numbers-wrapper">${lineNumbersCode}</div>`
+    const lineNumbersWrapperCode = `<div class="line-numbers-wrapper">${lineNumbersCode}</div>`
 
     const finalCode = rawCode
       .replace('<!--beforeend-->', `${lineNumbersWrapperCode}<!--beforeend-->`)

@@ -16,7 +16,7 @@ import 'prismjs/components/prism-markdown'
 import 'prismjs/themes/prism-tomorrow.css'
 import escapeHtml from 'escape-html'
 
-function wrap (code, lang) {
+function wrap(code, lang) {
   if (lang === 'text') {
     code = escapeHtml(code)
   }

@@ -6,16 +6,16 @@ import lineNumbers from './lineNumbers'
 import preWrapper from './preWrapper'
 import emoji from 'markdown-it-emoji'
 
-export default ({markdown = {}} = {}) => {
+export default ({ markdown = {} } = {}) => {
   const md = MarkdownIt({
     html: true,
     highlight,
   })
-  .use(highlightLines)
-  .use(preWrapper)
-  .use(containers)
-  .use(emoji)
-  .use(lineNumbers)
+    .use(highlightLines)
+    .use(preWrapper)
+    .use(containers)
+    .use(emoji)
+    .use(lineNumbers)
 
   return md
 }

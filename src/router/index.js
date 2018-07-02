@@ -10,12 +10,12 @@ export default new Router({
     {
       path: '/:slug',
       component: Slide,
-      name: 'SlideTop'
+      name: 'SlideTop',
     },
     {
       path: '/:slug/:page',
       name: 'Slide',
       component: Slide,
-    }
-  ]
+    },
+  ],
 })

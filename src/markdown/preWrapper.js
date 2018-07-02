@@ -12,7 +12,9 @@ export default md => {
     const [tokens, idx] = args
     const token = tokens[idx]
     const rawCode = fence(...args)
-    return `<!--beforebegin--><div class="language-${token.info.trim()} extra-class">` +
-    `<!--afterbegin-->${rawCode}<!--beforeend--></div><!--afterend-->`
+    return (
+      `<!--beforebegin--><div class="language-${token.info.trim()} extra-class">` +
+      `<!--afterbegin-->${rawCode}<!--beforeend--></div><!--afterend-->`
+    )
   }
 }

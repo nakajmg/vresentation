@@ -16,23 +16,26 @@ export default {
   render(h) {
     return (
       <div class="positionbar">
-        <div class="progressbar" style={`width: ${this.position}%`}></div>
+        <div class="progressbar" style={`width: ${this.position}%`} />
       </div>
     )
-  }
+  },
 }
 </script>
 
 <style lang="stylus">
-.positionbar
-  position absolute
-  bottom: 0
-  left 0
-  height 4px
-  width 100%
-  background-color rgba(0,0,0,.2)
-  .progressbar
-    height 100%
-    background-color rebeccapurple
-    transition width ease 150ms
+.positionbar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 4px;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.2);
+
+  .progressbar {
+    height: 100%;
+    background-color: rebeccapurple;
+    transition: width ease 150ms;
+  }
+}
 </style>

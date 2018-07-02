@@ -1,7 +1,12 @@
 <script>
 import { library } from '@fortawesome/fontawesome-svg-core'
-import {faArrowRight, faArrowLeft, faArrowAltCircleRight, faArrowAltCircleLeft} from '@fortawesome/free-solid-svg-icons'
-import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome'
+import {
+  faArrowRight,
+  faArrowLeft,
+  faArrowAltCircleRight,
+  faArrowAltCircleLeft,
+} from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 library.add(faArrowRight, faArrowLeft, faArrowAltCircleRight, faArrowAltCircleLeft)
 export default {
   props: {
@@ -24,19 +29,11 @@ export default {
   render(h) {
     return (
       <nav class="navigator">
-        <a
-          class="navigator-button"
-          onClick={this.prev}
-          disabled={this.isStartPage}
-        >
-          <FontAwesomeIcon icon="arrow-alt-circle-left"/>
+        <a class="navigator-button" onClick={this.prev} disabled={this.isStartPage}>
+          <FontAwesomeIcon icon="arrow-alt-circle-left" />
         </a>
-        <a
-          class="navigator-button"
-          onClick={this.next}
-          disabled={this.isEndPage}
-        >
-          <FontAwesomeIcon icon="arrow-alt-circle-right"/>
+        <a class="navigator-button" onClick={this.next} disabled={this.isEndPage}>
+          <FontAwesomeIcon icon="arrow-alt-circle-right" />
         </a>
       </nav>
     )
@@ -65,20 +62,20 @@ export default {
     next() {
       if (this.isEndPage) return
       const page = this.page + 1
-      this.navigate({page})
+      this.navigate({ page })
     },
     prev() {
       if (this.isStartPage) return
       const page = this.page - 1
-      this.navigate({page})
+      this.navigate({ page })
     },
-    navigate({page}) {
+    navigate({ page }) {
       this.$router.push({
         name: 'Slide',
         params: {
           slug: this.slug,
           page,
-        }
+        },
       })
     },
     replaceToTop() {
@@ -86,27 +83,34 @@ export default {
         name: 'SlideTop',
         params: {
           slug: this.slug,
-        }
+        },
       })
-    }
+    },
   },
 }
 </script>
 
 <style lang="stylus">
-.navigator
-  position absolute
-  bottom 8px
-  right: 0
-  .navigator-button
-    font-size: 3em
-    opacity: 0.2
-    margin: 0.3em
-    cursor pointer
-    transition opacity ease 200ms
-    &:hover
-      opacity 1
-    &[disabled]
-      cursor not-allowed
-      opacity 0
+.navigator {
+  position: absolute;
+  bottom: 8px;
+  right: 0;
+
+  .navigator-button {
+    font-size: 3em;
+    opacity: 0.2;
+    margin: 0.3em;
+    cursor: pointer;
+    transition: opacity ease 200ms;
+
+    &:hover {
+      opacity: 1;
+    }
+
+    &[disabled] {
+      cursor: not-allowed;
+      opacity: 0;
+    }
+  }
+}
 </style>
