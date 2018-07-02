@@ -34,8 +34,8 @@ export default {
 
   .progressbar {
     height: 100%;
-    background-color: rebeccapurple;
-    transition: width ease 150ms;
+    background-color: #fff;
+    transition: width ease-out 200ms;
   }
 }
 </style>

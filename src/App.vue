@@ -20,7 +20,8 @@ body {
   color: #2c3e50;
   height: 100vh;
   margin: 0;
-  background-color: aquamarine;
+  background-color: #0a9b94;
+  color: #fff;
 }
 #app {
   height: 100%;
