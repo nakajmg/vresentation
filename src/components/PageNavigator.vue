@@ -98,18 +98,18 @@ export default {
 
   .navigator-button {
     font-size: 3em;
-    opacity: 0.2;
+    opacity: 0.3;
     margin: 0.3em;
     cursor: pointer;
     transition: opacity ease 200ms;
 
     &:hover {
-      opacity: 1;
+      opacity: 0.7;
     }
 
     &[disabled] {
-      cursor: not-allowed;
-      opacity: 0;
+      cursor: none;
+      opacity: 0.1;
     }
   }
 }
