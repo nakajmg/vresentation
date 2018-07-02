@@ -22,10 +22,6 @@ export default {
   components: {
     FontAwesomeIcon,
   },
-  mounted() {
-    this.$mousetrap.bind(['right', 'space'], this.next)
-    this.$mousetrap.bind(['left', 'shift+space'], this.prev)
-  },
   render(h) {
     return (
       <nav class="navigator">
@@ -37,6 +33,10 @@ export default {
         </a>
       </nav>
     )
+  },
+  mounted() {
+    this.$mousetrap.bind(['right', 'space'], this.next)
+    this.$mousetrap.bind(['left', 'shift+space'], this.prev)
   },
   watch: {
     page: {

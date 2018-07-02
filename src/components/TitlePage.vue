@@ -14,7 +14,7 @@ export default {
       <div class="titlepage">
         <h1>{title}</h1>
         <div>
-          {date} - {location} - {author}
+          {date} {location} {author}
         </div>
       </div>
     )

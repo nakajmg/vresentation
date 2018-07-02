@@ -7,9 +7,10 @@ export default {
       default: '',
     },
   },
-  render(h, context) {
-    const { content } = context.props
+  render(h, { props, data }) {
+    const { content } = props
     return h('div', {
+      ...data,
       class: {
         contentpage: true,
       },

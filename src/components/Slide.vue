@@ -22,11 +22,16 @@ export default {
   render(h) {
     return (
       <section class="wrapper">
-        {this.isStartPage ? (
-          <TitlePage class="titlepage" meta={this.meta} />
-        ) : (
-          <ContentPage content={this.content} />
-        )}
+        <transition name="fade" mode="out-in">
+          {this.isStartPage ? (
+            <TitlePage class="titlepage" meta={this.meta} />
+          ) : (
+            this.contents.map(
+              (content, index) =>
+                this.page === index + 1 ? <ContentPage content={content} key={index} /> : null,
+            )
+          )}
+        </transition>
         <PageNavigator length={this.contentsLength} page={this.page} />
         <PagePositionBar length={this.contentsLength} page={this.page} />
       </section>
@@ -69,5 +74,13 @@ export default {
   margin: 0;
   position: relative;
   user-select: none;
+}
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity 200ms;
+}
+
+.fade-enter, .fade-leave-to { /* .fade-leave-active below version 2.1.8 */
+  opacity: 0;
 }
 </style>
