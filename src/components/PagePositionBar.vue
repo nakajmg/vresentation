@@ -1,5 +1,7 @@
 <script>
+import className from '../modules/className'
 export default {
+  name: 'PagePosition',
   props: {
     length: {
       type: Number,
@@ -15,16 +17,16 @@ export default {
   },
   render(h) {
     return (
-      <div class="positionbar">
-        <div class="progressbar" style={`width: ${this.position}%`} />
+      <div class={className(this)}>
+        <div class={className(this, 'ProgressBar')} style={`width: ${this.position}%`} />
       </div>
     )
   },
 }
 </script>
 
-<style lang="stylus">
-.positionbar {
+<style lang="stylus" scoped>
+.PagePosition {
   position: absolute;
   bottom: 0;
   left: 0;
@@ -32,7 +34,7 @@ export default {
   width: 100%;
   background-color: rgba(0, 0, 0, 0.2);
 
-  .progressbar {
+  &_ProgressBar {
     height: 100%;
     background-color: #fff;
     transition: width ease-out 200ms;

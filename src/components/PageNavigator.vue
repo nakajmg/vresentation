@@ -8,7 +8,9 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 library.add(faArrowRight, faArrowLeft, faArrowAltCircleRight, faArrowAltCircleLeft)
+import className from '../modules/className'
 export default {
+  name: 'PageNavigator',
   props: {
     length: {
       type: Number,
@@ -24,11 +26,11 @@ export default {
   },
   render(h) {
     return (
-      <nav class="navigator">
-        <a class="navigator-button" onClick={this.prev} disabled={this.isStartPage}>
+      <nav class={className(this)}>
+        <a class={className(this, 'Button')} onClick={this.prev} disabled={this.isStartPage}>
           <FontAwesomeIcon icon="arrow-alt-circle-left" />
         </a>
-        <a class="navigator-button" onClick={this.next} disabled={this.isEndPage}>
+        <a class={className(this, 'Button')} onClick={this.next} disabled={this.isEndPage}>
           <FontAwesomeIcon icon="arrow-alt-circle-right" />
         </a>
       </nav>
@@ -90,13 +92,13 @@ export default {
 }
 </script>
 
-<style lang="stylus">
-.navigator {
+<style lang="stylus" scoped>
+.PageNavigator {
   position: absolute;
   bottom: 8px;
   right: 0;
 
-  .navigator-button {
+  &_Button {
     font-size: 3em;
     opacity: 0.3;
     margin: 0.3em;

@@ -12,18 +12,15 @@ export default {
     return h('div', {
       ...data,
       class: {
-        contentpage: true,
+        ContentPage: true,
       },
       domProps: { innerHTML: content },
     })
   },
 }
 </script>
-
 <style lang="stylus">
-@require './theme.styl';
-
-.contentpage {
+.ContentPage {
   > h1, > h2, > h3, > h4, > h5 {
     margin-top: 0;
   }

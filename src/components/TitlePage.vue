@@ -1,19 +1,19 @@
 <script>
+import className from '../modules/className'
 export default {
   name: 'TitlePage',
-  functional: true,
   props: {
     meta: {
       type: Object,
       default: () => {},
     },
   },
-  render(h, { props, data }) {
-    const { title, author, location, date } = props.meta
+  render(h) {
+    const { title, author, location, date } = this.$props.meta
     return (
-      <div class="titlepage">
-        <h1>{title}</h1>
-        <div>
+      <div class={className(this)}>
+        <h1 class={className(this, 'Title')}>{title}</h1>
+        <div class={className(this, 'Info')}>
           {date} {location} {author}
         </div>
       </div>
@@ -22,15 +22,15 @@ export default {
 }
 </script>
 
-<style lang="stylus">
-.titlepage {
+<style lang="stylus" scoped>
+.TitlePage {
   display: flex;
   height: 100%;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 
-  h1 {
+  &_Title {
     font-size: 4em;
     text-align: center;
   }

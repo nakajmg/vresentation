@@ -10,10 +10,9 @@ export default {
 }
 </script>
 
-<style>
+<style lang="stylus">
 body {
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell,
-    Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-size: 16px;
@@ -23,7 +22,10 @@ body {
   background-color: #0a9b94;
   color: #fff;
 }
+
 #app {
   height: 100%;
 }
+
+@require './theme.styl';
 </style>
