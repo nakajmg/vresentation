@@ -3,7 +3,7 @@ import frontmatter from 'frontmatter'
 import TitlePage from './TitlePage.vue'
 import ContentPage from './ContentPage.vue'
 import PageNavigator from './PageNavigator.vue'
-import PagePositionBar from './PagePositionBar.vue'
+import PagePosition from './PagePosition.vue'
 import MD from '../markdown/index'
 export default {
   name: 'SlidePage',
@@ -11,7 +11,7 @@ export default {
     TitlePage,
     ContentPage,
     PageNavigator,
-    PagePositionBar,
+    PagePosition,
   },
   data() {
     return {
@@ -33,7 +33,7 @@ export default {
           )}
         </transition>
         <PageNavigator length={this.contentsLength} page={this.page} />
-        <PagePositionBar length={this.contentsLength} page={this.page} />
+        <PagePosition length={this.contentsLength} page={this.page} />
       </section>
     )
   },

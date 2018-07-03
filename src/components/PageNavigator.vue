@@ -37,17 +37,8 @@ export default {
     )
   },
   mounted() {
-    this.$mousetrap.bind(['right', 'space'], this.next)
-    this.$mousetrap.bind(['left', 'shift+space'], this.prev)
-  },
-  watch: {
-    page: {
-      handler() {
-        if (parseInt(this.$route.params.page) !== 0) return
-        this.replaceToTop()
-      },
-      immediate: true,
-    },
+    this._bindShortcutKey()
+    this._startWatch()
   },
   computed: {
     slug() {
@@ -61,6 +52,22 @@ export default {
     },
   },
   methods: {
+    _bindShortcutKey() {
+      this.$mousetrap.bind(['right', 'space'], this.next)
+      this.$mousetrap.bind(['left', 'shift+space'], this.prev)
+    },
+    _startWatch() {
+      this.$watch(
+        'page',
+        () => {
+          if (this.page !== 0) return
+          this.replaceToTop()
+        },
+        {
+          immediate: true,
+        },
+      )
+    },
     next() {
       if (this.isEndPage) return
       const page = this.page + 1

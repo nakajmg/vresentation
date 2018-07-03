@@ -14,6 +14,11 @@ describe('TitlePage.vue', () => {
       },
     })
     expect(wrapper.find('h1').text()).toBe('test title')
-    expect(wrapper.vm.$props.meta.title).toBe('test title')
+    expect(wrapper.vm.$props.meta).toEqual({
+      title: 'test title',
+      author: 'test author',
+      location: 'test location',
+      date: 'test date',
+    })
   })
 })
