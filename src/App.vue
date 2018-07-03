@@ -1,12 +1,17 @@
 <template>
   <div id="app">
+    <TestComponent text="ほげほげほげ"/>
     <router-view/>
   </div>
 </template>
 
 <script>
+import TestComponent from './components/TestComponent.js'
 export default {
   name: 'App',
+  components: {
+    TestComponent,
+  },
 }
 </script>
 

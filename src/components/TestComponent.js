@@ -1,10 +1,14 @@
+import styled from 'vue-styled-components'
+const TestComponent = styled.div`
+  color: red;
+  font-size: 2em;
+`
 export default {
   props: {
     text: {
       type: String,
-      default: 'hogehoge',
     },
   },
   functional: true,
-  render: (h, context) => <div>{context.props.text}</div>,
+  render: (h, { props }) => <TestComponent>{props.text}</TestComponent>,
 }
