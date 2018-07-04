@@ -4,7 +4,9 @@ import TitlePage from './TitlePage.vue'
 import ContentPage from './ContentPage.vue'
 import PageNavigator from './PageNavigator.vue'
 import PagePosition from './PagePosition.vue'
+import ThemeSwitcher from './ThemeSwitcher'
 import MD from '../markdown/index'
+import { upperFirst } from 'lodash-es'
 export default {
   name: 'SlidePage',
   components: {
@@ -12,32 +14,41 @@ export default {
     ContentPage,
     PageNavigator,
     PagePosition,
+    ThemeSwitcher,
   },
   data() {
     return {
       meta: {},
       contents: [],
+      themes: ['Light', 'Dark'],
+      theme: 'Light',
     }
   },
   render(h) {
     return (
-      <section class="wrapper">
+      <section class={`Slide ${this.themeClass}`}>
         <transition name="fade" mode="out-in">
           {this.isStartPage ? (
-            <TitlePage class="titlepage" meta={this.meta} />
+            <TitlePage meta={this.meta} theme={this.theme} />
           ) : (
             this.contents.map(
               (content, index) =>
-                this.page === index + 1 ? <ContentPage content={content} key={index} /> : null,
+                this.page === index + 1 ? (
+                  <ContentPage content={content} key={index} theme={this.theme} />
+                ) : null,
             )
           )}
         </transition>
-        <PageNavigator length={this.contentsLength} page={this.page} />
-        <PagePosition length={this.contentsLength} page={this.page} />
+        <ThemeSwitcher themes={this.themes} handleChange={this.changeTheme} />
+        <PageNavigator length={this.contentsLength} page={this.page} theme={this.theme} />
+        <PagePosition length={this.contentsLength} page={this.page} theme={this.theme} />
       </section>
     )
   },
   computed: {
+    themeClass() {
+      return `Theme_${this.theme}`
+    },
     page() {
       return parseInt(this.$route.params.page) || 0
     },
@@ -65,15 +76,31 @@ export default {
         this.contents = contents
       })
   },
+  methods: {
+    changeTheme(theme) {
+      this.theme = theme
+    },
+  },
 }
 </script>
 
 <style lang="stylus">
-.wrapper {
+.Slide {
   height: 100%;
   margin: 0;
   position: relative;
   user-select: none;
+  font-size: 16px;
+}
+
+.Theme_Light {
+  background-color: #f2f2f2;
+  color: #333;
+}
+
+.Theme_Dark {
+  color: #fff;
+  background-color: rgb(38, 34, 35);
 }
 
 .fade-enter-active, .fade-leave-active {

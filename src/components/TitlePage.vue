@@ -7,6 +7,9 @@ export default {
       type: Object,
       default: () => {},
     },
+    theme: {
+      type: String,
+    },
   },
   render(h) {
     const { title, author, location, date } = this.$props.meta

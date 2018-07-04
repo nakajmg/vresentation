@@ -20,6 +20,9 @@ export default {
       type: Number,
       default: 0,
     },
+    theme: {
+      type: String,
+    },
   },
   components: {
     FontAwesomeIcon,

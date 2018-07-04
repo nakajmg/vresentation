@@ -9,6 +9,9 @@ export default {
     page: {
       type: Number,
     },
+    theme: {
+      type: String,
+    },
   },
   computed: {
     position() {

@@ -6,6 +6,9 @@ export default {
       type: String,
       default: '',
     },
+    theme: {
+      type: String,
+    },
   },
   render(h, { props, data }) {
     const { content } = props

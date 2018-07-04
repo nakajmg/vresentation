@@ -19,6 +19,7 @@
     "escape-html": "^1.0.3",
     "frontmatter": "0.0.3",
     "i": "^0.3.6",
+    "lodash-es": "^4.17.10",
     "markdown-it": "^8.4.1",
     "markdown-it-container": "^2.0.0",
     "markdown-it-emoji": "^1.4.0",
