@@ -4,16 +4,22 @@ import className from '../modules/className'
 export default {
   name: 'PageNavigator',
   props: {
-    length: {
-      type: Number,
-      default: 0,
+    theme: {
+      type: String,
+    },
+    slug: {
+      type: String,
     },
     page: {
       type: Number,
-      default: 0,
     },
-    theme: {
-      type: String,
+    isStartPage: {
+      type: Boolean,
+      default: false,
+    },
+    isEndPage: {
+      type: Boolean,
+      default: false,
     },
   },
   components: {
@@ -36,17 +42,6 @@ export default {
     this._bindShortcutKey()
     this._startWatch()
   },
-  computed: {
-    slug() {
-      return this.$route.params.slug
-    },
-    isStartPage() {
-      return this.page === 0
-    },
-    isEndPage() {
-      return this.page === this.length
-    },
-  },
   methods: {
     _bindShortcutKey() {
       this.$mousetrap.bind(['right', 'space'], this.next)
@@ -66,13 +61,11 @@ export default {
     },
     next() {
       if (this.isEndPage) return
-      const page = this.page + 1
-      this.navigate({ page })
+      this.navigate({ page: this.page + 1 })
     },
     prev() {
       if (this.isStartPage) return
-      const page = this.page - 1
-      this.navigate({ page })
+      this.navigate({ page: this.page - 1 })
     },
     navigate({ page }) {
       this.$router.push({
@@ -97,12 +90,10 @@ export default {
 
 <style lang="stylus" scoped>
 .PageNavigator {
-  position: absolute;
-  bottom: 0;
-  right: 0;
   display: flex;
   justify-content: center;
   align-items: center;
+  user-select: none;
 
   &_Button {
     font-size: 2.5em;

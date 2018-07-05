@@ -3,7 +3,7 @@ import className from '../modules/className'
 export default {
   name: 'TitlePage',
   props: {
-    meta: {
+    pageMeta: {
       type: Object,
       default: () => ({}),
     },
@@ -12,7 +12,7 @@ export default {
     },
   },
   render(h) {
-    const { title, author, location, date } = this.$props.meta
+    const { title, author, location, date } = this.pageMeta
     return (
       <div class={className(this)}>
         <h1 class={className(this, 'Title')}>{title}</h1>

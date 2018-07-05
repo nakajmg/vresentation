@@ -4,6 +4,9 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import VueMousetrap from 'vue-mousetrap'
+import store from './store'
+import { sync } from 'vuex-router-sync'
+sync(store, router)
 Vue.use(VueMousetrap)
 
 Vue.config.productionTip = false
@@ -13,5 +16,8 @@ new Vue({
   el: '#app',
   router,
   components: { App },
-  template: '<App/>',
+  render(h) {
+    return <App />
+  },
+  store,
 })

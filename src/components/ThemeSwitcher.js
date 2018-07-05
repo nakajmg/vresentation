@@ -1,9 +1,4 @@
 import styled from 'vue-styled-components'
-const ThemeSwitcher = styled.div`
-  position: absolute;
-  top: 8px;
-  right: 8px;
-`
 const btnProps = {
   theme: String,
 }
@@ -36,18 +31,19 @@ export default {
       type: Array,
       default: () => [],
     },
-    handleChange: {
-      type: Function,
-      default: () => {},
-    },
   },
   render(h) {
     return (
-      <ThemeSwitcher>
+      <div>
         {this.themes.map(theme => (
-          <SwitchButton onClick={() => this.handleChange(theme)} theme={theme} />
+          <SwitchButton onClick={() => this.selectTheme(theme)} theme={theme} />
         ))}
-      </ThemeSwitcher>
+      </div>
     )
+  },
+  methods: {
+    selectTheme(theme) {
+      this.$emit('select', { theme })
+    },
   },
 }

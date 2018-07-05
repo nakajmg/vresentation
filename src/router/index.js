@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Slide from '../components/Slide.vue'
+import SlideContainer from '../container/SlideContainer.vue'
 import TalkList from '../components/TalkList'
 Vue.use(Router)
 
@@ -14,13 +14,13 @@ export default new Router({
     },
     {
       path: '/:slug',
-      component: Slide,
       name: 'SlideTop',
+      component: SlideContainer,
     },
     {
       path: '/:slug/:page',
       name: 'Slide',
-      component: Slide,
+      component: SlideContainer,
     },
   ],
 })

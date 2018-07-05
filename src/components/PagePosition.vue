@@ -3,11 +3,11 @@ import className from '../modules/className'
 export default {
   name: 'PagePosition',
   props: {
-    length: {
-      type: Number,
-    },
     page: {
       type: Number,
+    },
+    pages: {
+      type: Array,
     },
     theme: {
       type: String,
@@ -15,7 +15,7 @@ export default {
   },
   computed: {
     position() {
-      return this.page / this.length * 100
+      return this.page / this.pages.length * 100
     },
   },
   render(h) {
@@ -30,9 +30,6 @@ export default {
 
 <style lang="stylus" scoped>
 .PagePosition {
-  position: absolute;
-  bottom: 0;
-  left: 0;
   height: 4px;
   width: 100%;
 

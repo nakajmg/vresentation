@@ -2,7 +2,7 @@
 export default {
   functional: true,
   props: {
-    content: {
+    pageContent: {
       type: String,
       default: '',
     },
@@ -12,11 +12,11 @@ export default {
   },
   render(h, { props, data }) {
     const klass = data.class ? `ContentPage ${data.class}` : 'ContentPage'
-    const { content } = props
+    const { pageContent } = props
     return h('div', {
       ...data,
       class: klass,
-      domProps: { innerHTML: content },
+      domProps: { innerHTML: pageContent },
     })
   },
 }

@@ -16,6 +16,7 @@
     "@fortawesome/fontawesome-svg-core": "^1.2.0",
     "@fortawesome/free-solid-svg-icons": "^5.1.0",
     "@fortawesome/vue-fontawesome": "^0.1.0",
+    "axios": "^0.18.0",
     "dom-to-image": "^2.6.0",
     "escape-html": "^1.0.3",
     "frontmatter": "0.0.3",
@@ -30,7 +31,10 @@
     "vue": "^2.5.2",
     "vue-mousetrap": "^1.0.1",
     "vue-router": "^3.0.1",
-    "vue-styled-components": "^1.2.3"
+    "vue-styled-components": "^1.2.3",
+    "vuex": "^3.0.1",
+    "vuex-connect": "^2.1.0",
+    "vuex-router-sync": "^5.0.0"
   },
   "devDependencies": {
     "@vue/test-utils": "^1.0.0-beta.20",

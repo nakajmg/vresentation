@@ -85,9 +85,9 @@ export default {
   },
   methods: {
     async loadMarkdown() {
-      const { meta, contents } = await markdownLoader(this.$route.params.slug)
-      this.meta = meta
-      this.contents = contents
+      const { pageMeta, pages } = await markdownLoader(this.$route.params.slug)
+      this.meta = pageMeta
+      this.contents = pages
     },
     changeTheme(theme) {
       this.theme = theme
