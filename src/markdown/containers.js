@@ -1,13 +1,11 @@
 import container from 'markdown-it-container'
 
 export default md => {
-  md.use(...createContainer('tip', 'TIP'))
-    .use(...createContainer('warning', 'WARNING'))
-    .use(...createContainer('danger', 'WARNING'))
-    // explicitly escape Vue syntax
-    .use(container, 'v-pre', {
-      render: (tokens, idx) => (tokens[idx].nesting === 1 ? `<div v-pre>\n` : `</div>\n`),
-    })
+  md.use(...createContainer('center', ''))
+    .use(...createContainer('left', ''))
+    .use(...createContainer('right', ''))
+    .use(...createBgImageContainer('bg'))
+    .use(...createBgImageContainer('cover'))
 }
 
 function createContainer(klass, defaultTitle) {
@@ -22,10 +20,29 @@ function createContainer(klass, defaultTitle) {
           .slice(klass.length)
           .trim()
         if (token.nesting === 1) {
-          return `<div class="${klass} custom-block"><p class="custom-block-title">${info ||
-            defaultTitle}</p>\n`
+          return `<div class="${klass} custom-block">\n`
         } else {
           return `</div>\n`
+        }
+      },
+    },
+  ]
+}
+
+function createBgImageContainer(klass) {
+  return [
+    container,
+    klass,
+    {
+      render(tokens, idx) {
+        const token = tokens[idx]
+        const [klassName, path, filter] = token.info.trim().split(' ')
+        if (token.nesting === 1) {
+          return `<div class="${klassName} custom-block"><div class="background" style="${
+            path ? 'background-image: url(' + path + ');' : ''
+          } ${filter ? 'filter:' + filter + ';' : ''}"></div><div class="foreground">\n`
+        } else {
+          return `</div></div>\n`
         }
       },
     },

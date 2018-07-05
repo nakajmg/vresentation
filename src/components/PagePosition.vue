@@ -20,7 +20,7 @@ export default {
   },
   render(h) {
     return (
-      <div class={className(this)}>
+      <div class={`${className(this)} ${this.theme}`}>
         <div class={className(this, 'ProgressBar')} style={`width: ${this.position}%`} />
       </div>
     )
@@ -35,12 +35,20 @@ export default {
   left: 0;
   height: 4px;
   width: 100%;
-  background-color: rgba(0, 0, 0, 0.2);
+
+  &.Light {
+    background-color: #f2f2f2;
+  }
+
+  &.Dark {
+    background-color: #262223;
+  }
 
   &_ProgressBar {
     height: 100%;
-    background-color: #fff;
+    background-color: inherit;
     transition: width ease-out 200ms;
+    filter: invert(60%);
   }
 }
 </style>

@@ -1,13 +1,29 @@
 <script>
+// import ToImage from './components/ToImage.vue'
 export default {
   name: 'App',
+  data() {
+    return {
+      src: null,
+      el: {
+        node: null,
+      },
+    }
+  },
+  // components: {
+  //   ToImage,
+  // },
   render(h) {
     return (
-      <div id="app">
+      <div id="app" ref="content">
+        {/*<ToImage el={this.el} />*/}
         <router-view />
       </div>
     )
   },
+  // mounted() {
+  //   this.el.node = this.$refs.content
+  // },
 }
 </script>
 
@@ -24,5 +40,6 @@ body {
   height: 100%;
 }
 
-@require './theme.styl';
+@import '../node_modules/prismjs/themes/prism-tomorrow.css';
+// @import './theme.styl';
 </style>

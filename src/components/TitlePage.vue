@@ -5,7 +5,7 @@ export default {
   props: {
     meta: {
       type: Object,
-      default: () => {},
+      default: () => ({}),
     },
     theme: {
       type: String,

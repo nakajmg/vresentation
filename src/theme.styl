@@ -51,9 +51,9 @@ div[class*="language-"]
     top 0
     left 0
     width 100%
-    line-height 1.4
+    line-height 1.5
     .highlighted
-      background-color rgba(0, 0, 0, 66%)
+      background-color rgba(0, 0, 0, 25%)
   pre, pre[class*="language-"]
     background transparent
     position relative
@@ -71,6 +71,7 @@ div[class*="language-"]
   &.line-numbers-mode
     .highlight-lines .highlighted
         position relative
+        z-index: 3
         &:before
           content ' '
           position absolute
@@ -80,7 +81,7 @@ div[class*="language-"]
           display block
           width $lineNumbersWrapperWidth
           height 100%
-          background-color rgba(0, 0, 0, 66%)
+          background-color rgba(0, 0, 0, 25%)
     pre
       padding-left $lineNumbersWrapperWidth + 1 rem
       vertical-align middle
@@ -91,7 +92,7 @@ div[class*="language-"]
       text-align center
       color rgba(255, 255, 255, 0.3)
       padding 1.25rem 0
-      line-height 1.4
+      line-height 1.5
       br
         user-select none
       .line-number
@@ -108,7 +109,7 @@ div[class*="language-"]
       width $lineNumbersWrapperWidth
       height 100%
       border-radius 6px 0 0 6px
-      border-right 1px solid rgba(0, 0, 0, 66%)
+      border-right 1px solid rgba(0, 0, 0, 25%)
       background-color $codeBgColor
 
 

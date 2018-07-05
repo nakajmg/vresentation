@@ -13,7 +13,6 @@ import 'prismjs/components/prism-c'
 import 'prismjs/components/prism-bash'
 import 'prismjs/components/prism-yaml'
 import 'prismjs/components/prism-markdown'
-import 'prismjs/themes/prism-tomorrow.css'
 import escapeHtml from 'escape-html'
 
 function wrap(code, lang) {

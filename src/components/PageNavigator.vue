@@ -5,9 +5,18 @@ import {
   faArrowLeft,
   faArrowAltCircleRight,
   faArrowAltCircleLeft,
+  faAngleRight,
+  faAngleLeft,
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-library.add(faArrowRight, faArrowLeft, faArrowAltCircleRight, faArrowAltCircleLeft)
+library.add(
+  faArrowRight,
+  faArrowLeft,
+  faArrowAltCircleRight,
+  faArrowAltCircleLeft,
+  faAngleRight,
+  faAngleLeft,
+)
 import className from '../modules/className'
 export default {
   name: 'PageNavigator',
@@ -31,10 +40,11 @@ export default {
     return (
       <nav class={className(this)}>
         <a class={className(this, 'Button')} onClick={this.prev} disabled={this.isStartPage}>
-          <FontAwesomeIcon icon="arrow-alt-circle-left" />
+          <FontAwesomeIcon icon="angle-left" />
         </a>
+        <span class={className(this, 'Counter')}>{this.page}</span>
         <a class={className(this, 'Button')} onClick={this.next} disabled={this.isEndPage}>
-          <FontAwesomeIcon icon="arrow-alt-circle-right" />
+          <FontAwesomeIcon icon="angle-right" />
         </a>
       </nav>
     )
@@ -105,11 +115,14 @@ export default {
 <style lang="stylus" scoped>
 .PageNavigator {
   position: absolute;
-  bottom: 8px;
+  bottom: 0;
   right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
   &_Button {
-    font-size: 3em;
+    font-size: 2.5em;
     opacity: 0.3;
     margin: 0.3em;
     cursor: pointer;
@@ -123,6 +136,14 @@ export default {
       cursor: none;
       opacity: 0.1;
     }
+  }
+
+  &_Counter {
+    width: 20px;
+    text-align: center;
+    opacity: 0.3;
+    font-family: sans-serif;
+    font-weight: 600;
   }
 }
 </style>
