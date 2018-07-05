@@ -35,7 +35,7 @@ export default {
               class={className(this, 'Content')}
               meta={this.meta}
               theme={this.theme}
-              style={`transform: scale(${this.scale})`}
+              style={`font-size: ${this.scale * 2}em`}
             />
           ) : (
             this.contents.map(
@@ -46,7 +46,7 @@ export default {
                     content={content}
                     key={index}
                     theme={this.theme}
-                    style={`transform: scale(${this.scale})`}
+                    style={`font-size: ${this.scale * 2}em`}
                   />
                 ) : null,
             )
@@ -116,8 +116,8 @@ export default {
   #{$self}_Content {
     flex-grow: 1;
     // height: 100%;
-    height: 720px;
-    max-width: 960px;
+    min-height: 720px;
+    min-width: 960px;
     margin: 0 auto;
   }
 

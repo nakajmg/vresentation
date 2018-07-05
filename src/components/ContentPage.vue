@@ -57,13 +57,15 @@ export default {
   }
 
   // border: 1px solid aqua;
-  padding: 1em;
+  padding: 0.5em;
   display: flex;
   flex-direction: column;
   // align-items: center;
   // justify-content: center;
   font-size: 2.2em;
   box-sizing: border-box;
+  word-break: break-all;
+  overflow-x: scroll;
 
   [class*='language-'] {
     width: 100%;
