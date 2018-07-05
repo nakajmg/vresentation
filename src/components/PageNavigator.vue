@@ -1,22 +1,5 @@
 <script>
-import { library } from '@fortawesome/fontawesome-svg-core'
-import {
-  faArrowRight,
-  faArrowLeft,
-  faArrowAltCircleRight,
-  faArrowAltCircleLeft,
-  faAngleRight,
-  faAngleLeft,
-} from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-library.add(
-  faArrowRight,
-  faArrowLeft,
-  faArrowAltCircleRight,
-  faArrowAltCircleLeft,
-  faAngleRight,
-  faAngleLeft,
-)
+import Icon from './Icon.js'
 import className from '../modules/className'
 export default {
   name: 'PageNavigator',
@@ -34,17 +17,17 @@ export default {
     },
   },
   components: {
-    FontAwesomeIcon,
+    Icon,
   },
   render(h) {
     return (
       <nav class={className(this)}>
         <a class={className(this, 'Button')} onClick={this.prev} disabled={this.isStartPage}>
-          <FontAwesomeIcon icon="angle-left" />
+          <Icon icon="angle-left" />
         </a>
         <span class={className(this, 'Counter')}>{this.page}</span>
         <a class={className(this, 'Button')} onClick={this.next} disabled={this.isEndPage}>
-          <FontAwesomeIcon icon="angle-right" />
+          <Icon icon="angle-right" />
         </a>
       </nav>
     )

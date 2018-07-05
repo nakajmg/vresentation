@@ -1,13 +1,12 @@
 <script>
-import frontmatter from 'frontmatter'
 import TitlePage from './TitlePage.vue'
 import ContentPage from './ContentPage.vue'
 import PageNavigator from './PageNavigator.vue'
 import PagePosition from './PagePosition.vue'
 import ThemeSwitcher from './ThemeSwitcher'
-import MD from '../markdown/index'
-import { upperFirst, compact } from 'lodash-es'
 import className from '../modules/className.js'
+import markdownLoader from '../modules/markdownLoader.js'
+import ScaleController from './ScaleController.js'
 export default {
   name: 'SlidePage',
   components: {
@@ -16,6 +15,7 @@ export default {
     PageNavigator,
     PagePosition,
     ThemeSwitcher,
+    ScaleController,
   },
   data() {
     return {
@@ -23,6 +23,7 @@ export default {
       contents: [],
       themes: ['Light', 'Dark'],
       theme: 'Light',
+      scale: 1,
     }
   },
   render(h) {
@@ -30,7 +31,12 @@ export default {
       <section class={`${className(this)} ${this.themeClass}`}>
         <transition name="fade" mode="out-in">
           {this.isStartPage ? (
-            <TitlePage class={className(this, 'Content')} meta={this.meta} theme={this.theme} />
+            <TitlePage
+              class={className(this, 'Content')}
+              meta={this.meta}
+              theme={this.theme}
+              style={`transform: scale(${this.scale})`}
+            />
           ) : (
             this.contents.map(
               (content, index) =>
@@ -40,14 +46,20 @@ export default {
                     content={content}
                     key={index}
                     theme={this.theme}
+                    style={`transform: scale(${this.scale})`}
                   />
                 ) : null,
             )
           )}
         </transition>
         <ThemeSwitcher themes={this.themes} handleChange={this.changeTheme} />
+        <ScaleController
+          class="ScaleController"
+          scale={this.scale}
+          handleChange={this.changeScale}
+        />
         <PageNavigator length={this.contentsLength} page={this.page} theme={this.theme} />
-        <PagePosition length={this.contentsLength} page={this.page} theme={this.theme} />
+        <PagePosition length={this.contentsLengthz} page={this.page} theme={this.theme} />
       </section>
     )
   },
@@ -68,27 +80,20 @@ export default {
       return this.page === 0
     },
   },
-  async created() {
-    await fetch(`/static/talks/${this.$route.params.slug}/index.md`)
-      .then(res => res.text())
-      .then(md => {
-        const mdit = MD()
-        const parsed = frontmatter(md)
-        const rendered = mdit.render(parsed.content)
-        const contents = compact(rendered.split('<h2>')).map(content => `<h2>${content}`)
-        if (parsed.data === null) {
-          const matched = rendered.match(/<h[1,2]>(.*?)<\/h[1,2]>\n/)
-          parsed.data = {
-            title: matched[1],
-          }
-        }
-        this.meta = parsed.data
-        this.contents = contents
-      })
+  created() {
+    this.loadMarkdown()
   },
   methods: {
+    async loadMarkdown() {
+      const { meta, contents } = await markdownLoader(this.$route.params.slug)
+      this.meta = meta
+      this.contents = contents
+    },
     changeTheme(theme) {
       this.theme = theme
+    },
+    changeScale(scale) {
+      this.scale = scale
     },
   },
 }
@@ -131,6 +136,12 @@ export default {
     #{$self}_Content {
       @include dark;
     }
+  }
+
+  .ScaleController {
+    position: absolute;
+    top: 10px;
+    right: 100px;
   }
 }
 
