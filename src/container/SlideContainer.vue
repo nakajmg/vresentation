@@ -1,5 +1,5 @@
 <script>
-import { mapActions, mapState, mapGetters } from 'vuex'
+import { mapGetters } from 'vuex'
 import className from '../modules/className'
 import types from '../store/types'
 import TitlePage from '../connected/TitlePage.js'
@@ -34,11 +34,17 @@ export default {
     ...mapGetters(['slug', 'isStartPage']),
   },
   methods: {
-    ...mapActions({
-      fetchMarkdown: types.FETCH_MARKDOWN,
-    }),
     fetchContent() {
-      this.fetchMarkdown({ slug: this.slug })
+      this.$store.dispatch(types.FETCH_MARKDOWN, { slug: this.slug })
+    },
+    navigate({ page }) {
+      this.$router.push({
+        name: 'Slide',
+        params: {
+          slug: this.slug,
+          page,
+        },
+      })
     },
   },
 }

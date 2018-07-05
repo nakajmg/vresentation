@@ -28,11 +28,11 @@ export default {
   render(h) {
     return (
       <nav class={className(this)}>
-        <a class={className(this, 'Button')} onClick={this.prev} disabled={this.isStartPage}>
+        <a class={className(this, 'Button')} onClick={this.toPrev} disabled={this.isStartPage}>
           <Icon icon="angle-left" />
         </a>
         <span class={className(this, 'Counter')}>{this.page}</span>
-        <a class={className(this, 'Button')} onClick={this.next} disabled={this.isEndPage}>
+        <a class={className(this, 'Button')} onClick={this.toNext} disabled={this.isEndPage}>
           <Icon icon="angle-right" />
         </a>
       </nav>
@@ -40,30 +40,17 @@ export default {
   },
   mounted() {
     this._bindShortcutKey()
-    this._startWatch()
   },
   methods: {
     _bindShortcutKey() {
-      this.$mousetrap.bind(['right', 'space'], this.next)
-      this.$mousetrap.bind(['left', 'shift+space'], this.prev)
+      this.$mousetrap.bind(['right', 'space'], this.toNext)
+      this.$mousetrap.bind(['left', 'shift+space'], this.toPrev)
     },
-    _startWatch() {
-      this.$watch(
-        'page',
-        () => {
-          if (this.page !== 0) return
-          this.replaceToTop()
-        },
-        {
-          immediate: true,
-        },
-      )
-    },
-    next() {
+    toNext() {
       if (this.isEndPage) return
       this.navigate({ page: this.page + 1 })
     },
-    prev() {
+    toPrev() {
       if (this.isStartPage) return
       this.navigate({ page: this.page - 1 })
     },
@@ -73,14 +60,6 @@ export default {
         params: {
           slug: this.slug,
           page,
-        },
-      })
-    },
-    replaceToTop() {
-      this.$router.replace({
-        name: 'SlideTop',
-        params: {
-          slug: this.slug,
         },
       })
     },

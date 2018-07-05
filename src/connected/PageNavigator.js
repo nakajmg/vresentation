@@ -8,4 +8,7 @@ export default connect({
     isStartPage: 'isStartPage',
     isEndPage: 'isEndPage',
   },
+  stateToProps: {
+    theme: 'theme',
+  },
 })(PageNavigator)

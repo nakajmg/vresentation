@@ -5,4 +5,7 @@ export default connect({
   gettersToProps: {
     pageMeta: 'pageMeta',
   },
+  stateToProps: {
+    theme: 'theme',
+  },
 })(TitlePage)

@@ -4,7 +4,7 @@ import SlideContainer from '../container/SlideContainer.vue'
 import TalkList from '../components/TalkList'
 Vue.use(Router)
 
-export default new Router({
+const router = new Router({
   mode: 'history',
   routes: [
     {
@@ -24,3 +24,17 @@ export default new Router({
     },
   ],
 })
+
+router.beforeEach(({ params, name }, from, next) => {
+  if (name === 'Slide' && parseInt(params.page) === 0) {
+    return next({
+      name: 'SlideTop',
+      params,
+      replace: true,
+    })
+  } else {
+    return next()
+  }
+})
+
+export default router

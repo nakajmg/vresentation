@@ -5,4 +5,7 @@ export default connect({
   gettersToProps: {
     pageContent: 'pageContent',
   },
+  stateToProps: {
+    theme: 'theme',
+  },
 })(ContentPage)
