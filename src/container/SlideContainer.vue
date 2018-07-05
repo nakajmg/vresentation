@@ -51,7 +51,7 @@ export default {
     top: 0;
     left: 0;
     width: 100%;
-    z-index: 1;
+    z-index: 10;
     display: flex;
     justify-content: flex-end;
     padding-right: 1rem;
@@ -72,7 +72,7 @@ export default {
     bottom: 0;
     left: 0;
     width: 100%;
-    z-index: 1;
+    z-index: 10;
 
     .PageNavigator {
       position: absolute;

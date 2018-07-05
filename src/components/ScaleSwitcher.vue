@@ -31,7 +31,7 @@ export default {
       this.$emit('increase', { fontSize: this.fontSize + 0.2 })
     },
     decrease() {
-      this.$emit('decrease', { fontSize: this.fontSize + 0.2 })
+      this.$emit('decrease', { fontSize: this.fontSize - 0.2 })
     },
   },
 }
@@ -42,6 +42,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+  user-select: none;
 
   &_Button {
     font-size: 1.5em;
