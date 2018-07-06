@@ -1,6 +1,7 @@
 import MD from '../markdown/index'
 import frontmatter from 'frontmatter'
 import { compact } from 'lodash-es'
+import { heading12, heading34 } from '../modules/regex.js'
 const mdit = MD()
 export default {
   page({ route }) {
@@ -19,9 +20,9 @@ export default {
   },
   pagesHeading(state, { pages }) {
     return pages.map(content => {
-      let matched = content.match(/<h[1,2]>(.*?)<\/h[1,2]>\n/)
+      let matched = content.match(heading12)
       if (matched && matched[1] !== '') return matched[1]
-      matched = content.match(/<h[3, 4]>(.*?)<\/h[3]>\n/)
+      matched = content.match(heading34)
       if (matched && matched[1] !== '') return matched[1]
       return 'No Heading'
     })
@@ -33,7 +34,7 @@ export default {
     const { meta, rendered } = parsedMarkdown
     if (meta === null && rendered === '') return {}
     if (state.markdown !== '' && meta === null) {
-      const matched = rendered.match(/<h[1,2]>(.*?)<\/h[1,2]>\n/)
+      const matched = rendered.match(heading12)
       return {
         title: matched[1],
       }
