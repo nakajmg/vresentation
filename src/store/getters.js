@@ -1,4 +1,4 @@
-import MD from '../markdown/index'
+import MD from '../modules/markdown'
 import frontmatter from 'frontmatter'
 import { compact } from 'lodash-es'
 import { heading12, heading34 } from '../modules/regex.js'

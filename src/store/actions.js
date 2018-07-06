@@ -1,5 +1,4 @@
 import types from './types'
-import markdownLoader from '../modules/markdownLoader'
 import axios from 'axios'
 export default {
   async [types.FETCH_MARKDOWN]({ commit }, { slug }) {
