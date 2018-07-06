@@ -7,7 +7,7 @@ describe('PagePosition.vue', () => {
       const wrapper = shallowMount(PagePosition, {
         propsData: {
           page: 1,
-          length: 10,
+          pages: Array(10),
         },
       })
       expect(wrapper.vm.position).toBe(10)

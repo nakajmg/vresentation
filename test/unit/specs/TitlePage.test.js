@@ -5,7 +5,7 @@ describe('TitlePage.vue', () => {
   it('propsが受け取れてる', () => {
     const wrapper = shallowMount(TitlePage, {
       propsData: {
-        meta: {
+        pageMeta: {
           title: 'test title',
           author: 'test author',
           location: 'test location',
@@ -14,7 +14,7 @@ describe('TitlePage.vue', () => {
       },
     })
     expect(wrapper.find('h1').text()).toBe('test title')
-    expect(wrapper.vm.$props.meta).toEqual({
+    expect(wrapper.vm.$props.pageMeta).toEqual({
       title: 'test title',
       author: 'test author',
       location: 'test location',

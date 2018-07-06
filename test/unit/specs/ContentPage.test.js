@@ -6,11 +6,10 @@ describe('ContentPage.vue', () => {
     const wrapper = shallowMount(ContentPage, {
       context: {
         props: {
-          content: '<div>content</div>',
+          pageContent: '<div>content</div>',
         },
       },
     })
-    console.log(wrapper.text())
     expect(wrapper.html()).toBe('<div class="ContentPage"><div>content</div></div>')
   })
 })
