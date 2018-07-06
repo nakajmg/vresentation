@@ -17,6 +17,15 @@ export default {
   pages(state, { parsedMarkdown }) {
     return compact(parsedMarkdown.rendered.split('<h2>')).map(content => `<h2>${content}`)
   },
+  pagesHeading(state, { pages }) {
+    return pages.map(content => {
+      let matched = content.match(/<h[1,2]>(.*?)<\/h[1,2]>\n/)
+      if (matched && matched[1] !== '') return matched[1]
+      matched = content.match(/<h[3, 4]>(.*?)<\/h[3]>\n/)
+      if (matched && matched[1] !== '') return matched[1]
+      return 'No Heading'
+    })
+  },
   pageContent(state, { pages, page }) {
     return pages[page - 1]
   },

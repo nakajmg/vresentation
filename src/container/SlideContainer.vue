@@ -1,5 +1,4 @@
 <script>
-import { mapGetters } from 'vuex'
 import className from '../modules/className'
 import types from '../store/types'
 import TitlePage from '../connected/TitlePage.js'
@@ -8,8 +7,19 @@ import PageNavigator from '../connected/PageNavigator.js'
 import PagePosition from '../connected/PagePosition.js'
 import ThemeSwitcher from '../connected/ThemeSwitcher.js'
 import ScaleSwitcher from '../connected/ScaleSwitcher.js'
-export default {
+import PageJumper from '../connected/PageJumper.js'
+import { connect } from 'vuex-connect'
+
+const SlideContainer = {
   name: 'SlideContainer',
+  props: {
+    slug: {
+      type: String,
+    },
+    isStartPage: {
+      type: Boolean,
+    },
+  },
   render(h) {
     return (
       <section class={className(this)}>
@@ -21,22 +31,14 @@ export default {
           {this.isStartPage ? <TitlePage /> : <ContentPage />}
         </main>
         <footer class={className(this, 'Footer')}>
-          <PageNavigator class="PageNavigator" />
+          <PageNavigator onNavigate={this.navigate} class="PageNavigator" />
           <PagePosition class="PagePosition" />
         </footer>
+        <PageJumper class="PageJumper" onNavigate={this.navigate} />
       </section>
     )
   },
-  created() {
-    this.fetchContent()
-  },
-  computed: {
-    ...mapGetters(['slug', 'isStartPage']),
-  },
   methods: {
-    fetchContent() {
-      this.$store.dispatch(types.FETCH_MARKDOWN, { slug: this.slug })
-    },
     navigate({ page }) {
       this.$router.push({
         name: 'Slide',
@@ -48,9 +50,21 @@ export default {
     },
   },
 }
+
+export default connect({
+  gettersToProps: {
+    slug: 'slug',
+    isStartPage: 'isStartPage',
+  },
+  lifecycle: {
+    created({ dispatch, getters }) {
+      return dispatch(types.FETCH_MARKDOWN, { slug: getters.slug })
+    },
+  },
+})(SlideContainer)
 </script>
 
-<style lang="stylus" scoped>
+<style lang="stylus">
 .SlideContainer {
   &_Header {
     position: absolute;
@@ -89,6 +103,15 @@ export default {
     .PagePosition {
       position: relative;
     }
+  }
+
+  .PageJumper {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.1);
   }
 }
 </style>

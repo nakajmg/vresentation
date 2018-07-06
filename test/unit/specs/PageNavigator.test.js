@@ -7,8 +7,6 @@ describe('PageNavigator.vue', () => {
 
   describe('methods', () => {
     it('toPrev toNext', () => {
-      const pushStub = jest.fn()
-      const replaceStub = jest.fn()
       const wrapper = shallowMount(PageNavigator, {
         methods: mockMethods,
         propsData: {
@@ -17,28 +15,14 @@ describe('PageNavigator.vue', () => {
           isStartPage: false,
           isEndPage: false,
         },
-        mocks: {
-          $router: {
-            push: pushStub,
-            replace: replaceStub,
-          },
-        },
       })
       wrapper.vm.toNext()
-      expect(pushStub).toHaveBeenCalledWith({
-        name: 'Slide',
-        params: {
-          slug: 'test',
-          page: 2,
-        },
+      expect(wrapper.emitted('navigate')[0][0]).toEqual({
+        page: 2,
       })
       wrapper.vm.toPrev()
-      expect(pushStub).toHaveBeenCalledWith({
-        name: 'Slide',
-        params: {
-          slug: 'test',
-          page: 0,
-        },
+      expect(wrapper.emitted('navigate')[1][0]).toEqual({
+        page: 0,
       })
     })
   })

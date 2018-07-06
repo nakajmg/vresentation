@@ -26,13 +26,14 @@ export default {
     Icon,
   },
   render(h) {
+    const { toPrev, toNext, page, isStartPage, isEndPage } = this
     return (
       <nav class={className(this)}>
-        <a class={className(this, 'Button')} onClick={this.toPrev} disabled={this.isStartPage}>
+        <a class={className(this, 'Button')} onClick={toPrev} disabled={isStartPage}>
           <Icon icon="angle-left" />
         </a>
-        <span class={className(this, 'Counter')}>{this.page}</span>
-        <a class={className(this, 'Button')} onClick={this.toNext} disabled={this.isEndPage}>
+        <span class={className(this, 'Counter')}>{page}</span>
+        <a class={className(this, 'Button')} onClick={toNext} disabled={isEndPage}>
           <Icon icon="angle-right" />
         </a>
       </nav>
@@ -55,13 +56,7 @@ export default {
       this.navigate({ page: this.page - 1 })
     },
     navigate({ page }) {
-      this.$router.push({
-        name: 'Slide',
-        params: {
-          slug: this.slug,
-          page,
-        },
-      })
+      this.$emit('navigate', { page })
     },
   },
 }
