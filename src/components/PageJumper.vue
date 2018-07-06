@@ -1,5 +1,6 @@
 <script>
 import vShow from '../modules/vShow.js'
+import classNameHelper from '../modules/classNameHelper.js'
 export default {
   name: 'PageJumper',
   props: {
@@ -13,17 +14,15 @@ export default {
   },
   render(h) {
     const { visibility, close, pagesHeading, _currentPageClass, navigate } = this
+    const className = classNameHelper(this)
     return (
-      <div class="PageJumper" style={vShow(visibility)} onClick={close}>
-        <div class="PageJumper_Items">
+      <div {...className()} style={vShow(visibility)} onClick={close}>
+        <div {...className('Items')}>
           {pagesHeading.map((heading, page) => {
             return (
-              <a
-                class={`PageJumper_Item ${_currentPageClass(page)}`}
-                onClick={() => navigate(page + 1)}
-              >
-                <span class="PageJumper_PageNumber">{page + 1}</span>
-                <span class="PageJumper_PageHeading">{heading}</span>
+              <a {...className('Item', _currentPageClass(page))} onClick={() => navigate(page + 1)}>
+                <span {...className('PageNumber')}>{page + 1}</span>
+                <span {...className('PageHeading')}>{heading}</span>
               </a>
             )
           })}

@@ -1,5 +1,5 @@
 <script>
-import className from '../modules/className'
+import classNameHelper from '../modules/classNameHelper'
 export default {
   name: 'PagePosition',
   props: {
@@ -19,9 +19,10 @@ export default {
     },
   },
   render(h) {
+    const className = classNameHelper(this)
     return (
-      <div class={`${className(this)} ${this.theme}`}>
-        <div class={className(this, 'ProgressBar')} style={`width: ${this.position}%`} />
+      <div {...className(null, this.theme)}>
+        <div {...className('ProgressBar')} style={`width: ${this.position}%`} />
       </div>
     )
   },

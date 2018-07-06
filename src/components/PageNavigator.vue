@@ -1,6 +1,6 @@
 <script>
 import Icon from './Icon.js'
-import className from '../modules/className'
+import classNameHelper from '../modules/classNameHelper'
 export default {
   name: 'PageNavigator',
   props: {
@@ -27,13 +27,14 @@ export default {
   },
   render(h) {
     const { toPrev, toNext, page, isStartPage, isEndPage } = this
+    const className = classNameHelper(this)
     return (
-      <nav class={className(this)}>
-        <a class={className(this, 'Button')} onClick={toPrev} disabled={isStartPage}>
+      <nav {...className()}>
+        <a {...className('Button')} onClick={toPrev} disabled={isStartPage}>
           <Icon icon="angle-left" />
         </a>
-        <span class={className(this, 'Counter')}>{page}</span>
-        <a class={className(this, 'Button')} onClick={toNext} disabled={isEndPage}>
+        <span {...className('Counter')}>{page}</span>
+        <a {...className('Button')} onClick={toNext} disabled={isEndPage}>
           <Icon icon="angle-right" />
         </a>
       </nav>

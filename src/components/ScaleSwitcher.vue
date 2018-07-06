@@ -1,6 +1,6 @@
 <script>
 import Icon from './Icon.js'
-import className from '../modules/className'
+import classNameHelper from '../modules/classNameHelper'
 export default {
   name: 'ScaleSwitcher',
   props: {
@@ -9,13 +9,14 @@ export default {
     },
   },
   render(h) {
+    const className = classNameHelper(this)
     return (
-      <div class={className(this)}>
-        <span class={className(this, 'Button')} onClick={this.decrease}>
+      <div {...className()}>
+        <span {...className('Button')} onClick={this.decrease}>
           <Icon icon="search-minus" />
         </span>
-        <span class={className(this, 'Percent')}>{this.percent}%</span>
-        <span class={className(this, 'Button')} onClick={this.increase}>
+        <span {...className('Percent')}>{this.percent}%</span>
+        <span {...className('Button')} onClick={this.increase}>
           <Icon icon="search-plus" />
         </span>
       </div>

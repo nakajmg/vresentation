@@ -1,5 +1,5 @@
 <script>
-import className from '../modules/className'
+import classNameHelper from '../modules/classNameHelper'
 export default {
   name: 'TitlePage',
   props: {
@@ -13,10 +13,11 @@ export default {
   },
   render(h) {
     const { title, author, location, date } = this.pageMeta
+    const className = classNameHelper(this)
     return (
-      <div class={className(this)}>
-        <h1 class={className(this, 'Title')}>{title}</h1>
-        <div class={className(this, 'Info')}>
+      <div {...className()}>
+        <h1 {...className('Title')}>{title}</h1>
+        <div {...className('Info')}>
           {date} {location} {author}
         </div>
       </div>

@@ -1,5 +1,5 @@
 <script>
-import className from '../modules/className'
+import classNameHelper from '../modules/classNameHelper'
 import types from '../store/types'
 import TitlePage from '../connected/TitlePage.js'
 import ContentPage from '../connected/ContentPage.js'
@@ -21,16 +21,15 @@ const SlideContainer = {
     },
   },
   render(h) {
+    const className = classNameHelper(this)
     return (
-      <section class={className(this)}>
-        <header class={className(this, 'Header')}>
+      <section {...className()}>
+        <header {...className('Header')}>
           <ScaleSwitcher class="ScaleSwitcher" />
           <ThemeSwitcher class="ThemeSwitcher" />
         </header>
-        <main class={className(this, 'Main')}>
-          {this.isStartPage ? <TitlePage /> : <ContentPage />}
-        </main>
-        <footer class={className(this, 'Footer')}>
+        <main {...className('Main')}>{this.isStartPage ? <TitlePage /> : <ContentPage />}</main>
+        <footer {...className('Footer')}>
           <PageNavigator onNavigate={this.navigate} class="PageNavigator" />
           <PagePosition class="PagePosition" />
         </footer>
