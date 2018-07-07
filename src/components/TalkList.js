@@ -15,7 +15,7 @@ export default {
   },
   render(h) {
     return (
-      <ul>
+      <ul style="font-size: 2vw;margin: 1em;">
         {this.talks.map(({ slug, title }) => (
           <li>
             <router-link to={{ name: 'SlideTop', params: { slug } }}>{title}</router-link>

@@ -1,6 +1,6 @@
 import { connect } from 'vuex-connect'
 import types from '../store/types'
-import ThemeSwitcher from '../components/ThemeSwitcher.js'
+import ThemeSwitcher from '../components/ThemeSwitcher'
 
 export default connect({
   stateToProps: {

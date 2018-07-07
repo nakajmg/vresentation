@@ -9,6 +9,7 @@ import {
   faAngleLeft,
   faSearchPlus,
   faSearchMinus,
+  faCog,
 } from '@fortawesome/free-solid-svg-icons'
 library.add(
   faArrowRight,
@@ -19,16 +20,18 @@ library.add(
   faAngleLeft,
   faSearchPlus,
   faSearchMinus,
+  faCog,
 )
 
 export default {
+  functional: true,
   name: 'FAIcon',
   props: {
     icon: {
       type: String,
     },
   },
-  render(h) {
-    return <FontAwesomeIcon icon={this.icon} />
+  render(h, { props }) {
+    return <FontAwesomeIcon icon={props.icon} />
   },
 }
