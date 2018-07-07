@@ -60,10 +60,6 @@ export default {
     font-size: 1.5em;
   }
 
-  h4 {
-    // font-size: 1em;
-  }
-
   font-size: 3.4vw;
   font-family: corpmin;
   padding: 3vh 3vw;

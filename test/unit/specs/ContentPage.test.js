@@ -7,9 +7,10 @@ describe('ContentPage.vue', () => {
       context: {
         props: {
           pageContent: '<div>content</div>',
+          theme: 'Light',
         },
       },
     })
-    expect(wrapper.html()).toBe('<div class="ContentPage"><div>content</div></div>')
+    expect(wrapper.html()).toBe('<div class="ContentPage Theme_Light"><div>content</div></div>')
   })
 })
