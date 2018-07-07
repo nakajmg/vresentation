@@ -64,7 +64,7 @@ export default {
     background-color: rgba(#fff, 0.9);
     color: #333;
     border-radius: 2px;
-    max-height: 50%;
+    max-height: 75%;
     overflow: scroll;
   }
 

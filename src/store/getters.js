@@ -47,4 +47,8 @@ export default {
   isEndPage(state, { page, pages }) {
     return page === pages.length
   },
+  filterStyle({ filter }) {
+    const { brightness, contrast, saturate } = filter
+    return `filter: brightness(${brightness}) contrast(${contrast}) saturate(${saturate});`
+  },
 }

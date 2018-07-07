@@ -6,8 +6,11 @@ import ContentPage from '../connected/ContentPage.js'
 import PageNavigator from '../connected/PageNavigator.js'
 import PagePosition from '../connected/PagePosition.js'
 import ThemeSwitcher from '../connected/ThemeSwitcher.js'
+import ScreenFilter from '../connected/ScreenFilter'
 import PageJumper from '../connected/PageJumper.js'
 import { connect } from 'vuex-connect'
+import vShow from '../modules/vShow'
+import Icon from '../components/Icon'
 
 const SlideContainer = {
   name: 'SlideContainer',
@@ -24,14 +27,32 @@ const SlideContainer = {
     theme: {
       type: String,
     },
+    filterStyle: {
+      type: String,
+    },
+    visibility: {
+      type: Object,
+    },
   },
   render(h) {
     const className = classNameHelper(this)
-    const { fontSize, isStartPage, navigate, theme } = this
+    const {
+      fontSize,
+      isStartPage,
+      navigate,
+      theme,
+      filterStyle,
+      visibility,
+      toggleSettingsVisibility,
+    } = this
     return (
-      <section {...className(null, `Theme_${theme}`)}>
+      <section {...className(null, `Theme_${theme}`)} style={filterStyle}>
         <header {...className('Header')}>
-          <ThemeSwitcher class="ThemeSwitcher" />
+          <span class="SettingsCog" onClick={toggleSettingsVisibility}>
+            <Icon icon="cog" />
+          </span>
+          <ThemeSwitcher class="ThemeSwitcher" style={vShow(visibility.settings)} />
+          <ScreenFilter class="ScreenFilter" style={vShow(visibility.settings)} />
         </header>
         <main {...className('Main')}>{isStartPage ? <TitlePage /> : <ContentPage />}</main>
         <footer {...className('Footer')}>
@@ -42,7 +63,13 @@ const SlideContainer = {
       </section>
     )
   },
+  mounted() {
+    this._bindShortcutKey()
+  },
   methods: {
+    _bindShortcutKey() {
+      this.$mousetrap.bind('ctrl+s', this.toggleSettingsVisibility)
+    },
     navigate({ page }) {
       this.$router.push({
         name: 'Slide',
@@ -52,6 +79,10 @@ const SlideContainer = {
         },
       })
     },
+    toggleSettingsVisibility() {
+      const settingsVisibility = this.visibility.settings
+      this.$emit('update:visibility', { type: 'settings', value: !settingsVisibility })
+    },
   },
 }
 
@@ -59,10 +90,15 @@ export default connect({
   gettersToProps: {
     slug: 'slug',
     isStartPage: 'isStartPage',
+    filterStyle: 'filterStyle',
   },
   stateToProps: {
     fontSize: 'fontSize',
     theme: 'theme',
+    visibility: 'visibility',
+  },
+  mutationsToEvents: {
+    'update:visibility': types.SET_VISIBILITY,
   },
   lifecycle: {
     created({ dispatch, getters }) {
@@ -90,18 +126,31 @@ export default connect({
     left: 0;
     width: 100%;
     z-index: 10;
-    display: flex;
-    justify-content: flex-end;
     padding-right: 1rem;
     padding-top: 1rem;
     box-sizing: border-box;
+    text-align: right;
+
+    .SettingsCog {
+      text-align: right;
+      cursor: pointer;
+      opacity: 0.3;
+      font-size: 1.5em;
+
+      &:hover {
+        opacity: 1;
+      }
+    }
 
     .ThemeSwitcher {
       position: relative;
+      text-align: right;
+      margin: 1em 0;
     }
 
-    .ScaleSwitcher {
-      margin-right: 1rem;
+    .ScreenFilter {
+      position: relative;
+      text-align: right;
     }
   }
 
