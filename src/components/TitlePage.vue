@@ -32,10 +32,19 @@ export default {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  font-size: 3.4vw;
+  font-family: corpmin;
 
   &_Title {
-    font-size: 4em;
     text-align: center;
+    margin: 0;
+    font-size: 2em;
+  }
+
+  &_Info {
+    font-size: 0.8em;
   }
 }
 </style>

@@ -59,7 +59,9 @@ function createVideoContainer(klass) {
         const token = tokens[idx]
         const [klassName, videoPath] = token.info.trim().split(' ')
         if (token.nesting === 1) {
-          return `<div class="${klassName} custom-block"><video src="${videoPath}" controls preload="auto"></video>`
+          let html = `<div class="${klassName} custom-block">`
+          html += videoPath ? `<video src="${videoPath}" controls preload="auto"></video>` : ''
+          return html
         } else {
           return '</div>'
         }

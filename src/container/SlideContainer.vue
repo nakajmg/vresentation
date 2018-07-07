@@ -6,7 +6,6 @@ import ContentPage from '../connected/ContentPage.js'
 import PageNavigator from '../connected/PageNavigator.js'
 import PagePosition from '../connected/PagePosition.js'
 import ThemeSwitcher from '../connected/ThemeSwitcher.js'
-import ScaleSwitcher from '../connected/ScaleSwitcher.js'
 import PageJumper from '../connected/PageJumper.js'
 import { connect } from 'vuex-connect'
 
@@ -22,19 +21,19 @@ const SlideContainer = {
     fontSize: {
       type: Number,
     },
+    theme: {
+      type: String,
+    },
   },
   render(h) {
     const className = classNameHelper(this)
-    const { fontSize, isStartPage, navigate } = this
+    const { fontSize, isStartPage, navigate, theme } = this
     return (
-      <section {...className()}>
+      <section {...className(null, `Theme_${theme}`)}>
         <header {...className('Header')}>
-          <ScaleSwitcher class="ScaleSwitcher" />
           <ThemeSwitcher class="ThemeSwitcher" />
         </header>
-        <main {...className('Main')} style={`font-size: ${fontSize}em;`}>
-          {isStartPage ? <TitlePage /> : <ContentPage />}
-        </main>
+        <main {...className('Main')}>{isStartPage ? <TitlePage /> : <ContentPage />}</main>
         <footer {...className('Footer')}>
           <PageNavigator onNavigate={navigate} class="PageNavigator" />
           <PagePosition class="PagePosition" />
@@ -63,6 +62,7 @@ export default connect({
   },
   stateToProps: {
     fontSize: 'fontSize',
+    theme: 'theme',
   },
   lifecycle: {
     created({ dispatch, getters }) {
@@ -74,6 +74,16 @@ export default connect({
 
 <style lang="stylus">
 .SlideContainer {
+  &.Theme_Light {
+    background-color: #f2f2f2;
+    color: #333;
+  }
+
+  &.Theme_Dark {
+    color: #fff;
+    background-color: rgb(38, 34, 35);
+  }
+
   &_Header {
     position: absolute;
     top: 0;

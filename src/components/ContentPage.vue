@@ -11,8 +11,10 @@ export default {
     },
   },
   render(h, { props, data }) {
-    const klass = data.class ? `ContentPage ${data.class}` : 'ContentPage'
-    const { pageContent } = props
+    const { pageContent, theme } = props
+    const klass = data.class
+      ? `ContentPage Theme_${theme} ${data.class}`
+      : `ContentPage Theme_${theme}`
     return h('div', {
       ...data,
       class: klass,
@@ -21,18 +23,26 @@ export default {
   },
 }
 </script>
-<style lang="stylus">
+<style lang="scss">
+@import '../modules/markdown/prism-tomorrow.scss';
+@import '../modules/markdown/prism-okaidia.scss';
+@import url(http://fonts.googleapis.com/css?family=Source+Code+Pro);
 .ContentPage {
-  > h1, > h2, > h3, > h4, > h5 {
+  $self: &;
+  > h1,
+  > h2,
+  > h3,
+  > h4,
+  > h5 {
     position: relative;
     margin-top: 0;
-    margin-bottom: 0.5em;
+    margin-bottom: 0.4em;
     line-height: 1.24;
     z-index: 1;
   }
 
   h2 {
-    font-size: 1.5em;
+    // font-size: 1.5em;
 
     // &:after {
     // content: '';
@@ -48,33 +58,35 @@ export default {
 
   h3 {
     font-size: 1.5em;
-    text-align: center;
-    margin: auto 0;
   }
 
   h4 {
-    font-size: 1em;
+    // font-size: 1em;
   }
 
-  // border: 1px solid aqua;
-  padding: 0.5em;
+  font-size: 3.4vw;
+  font-family: corpmin;
+  padding: 3vh 3vw;
   display: flex;
   flex-direction: column;
-  // align-items: center;
-  // justify-content: center;
-  font-size: 2.2em;
   box-sizing: border-box;
   word-break: break-all;
   overflow-x: scroll;
+  height: 100vh;
+  max-width: 100vw;
 
-  [class*='language-'] {
+  div[class*='language-'] {
     width: 100%;
+    padding: 1em;
     box-sizing: border-box;
+    font-size: 0.5em;
   }
 
   ul {
     line-height: 1.75;
     margin: 0;
+    margin-left: 0.5em;
+    font-size: 0.9em;
   }
 
   img {
@@ -91,10 +103,12 @@ export default {
       display: none;
     }
 
-    margin-top: 0;
+    margin: 0;
+    padding-left: 0.5em;
   }
 
-  a:link, a:visited {
+  a:link,
+  a:visited {
     color: #1e90ff;
     text-decoration: none;
   }
@@ -119,14 +133,16 @@ export default {
 
     &.left {
       // margin: auto 0;
-      h2, h3, h4 {
+      h2,
+      h3,
+      h4 {
         margin-bottom: 0.5em;
       }
 
       img {
         float: left;
         width: 50%;
-        margin-right: 0.5em;
+        margin-right: 1em;
       }
 
       &:after {
@@ -138,14 +154,16 @@ export default {
 
     &.right {
       // margin: auto 0;
-      h2, h3, h4 {
+      h2,
+      h3,
+      h4 {
         margin-bottom: 0.5em;
       }
 
       img {
         float: right;
         width: 50%;
-        margin-right: 0.5em;
+        margin-left: 1em;
       }
 
       &:after {
@@ -155,7 +173,8 @@ export default {
       }
     }
 
-    &.bg, &.cover {
+    &.bg,
+    &.cover {
       .background {
         z-index: 0;
         width: 100%;
@@ -179,6 +198,32 @@ export default {
         z-index: 1;
       }
     }
+
+    &.bg {
+      .background {
+        filter: opacity(0.1);
+      }
+    }
+
+    &.video {
+      width: 72vw;
+      height: 40.5vw;
+      margin: 0 auto;
+
+      iframe,
+      video {
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+
+  &.Theme_Light {
+    @include light;
+  }
+
+  &.Theme_Dark {
+    @include dark;
   }
 }
 </style>

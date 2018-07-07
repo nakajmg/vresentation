@@ -40,6 +40,11 @@ body {
   height: 100%;
 }
 
-@import '../node_modules/prismjs/themes/prism-tomorrow.css';
+// @import '../node_modules/prismjs/themes/prism-tomorrow.css';
+
 // @import './theme.styl';
+@font-face {
+  font-family: 'corpmin';
+  src: url('./assets/fonts/logotypejp_corpmin.ttf') format('ttf');
+}
 </style>
