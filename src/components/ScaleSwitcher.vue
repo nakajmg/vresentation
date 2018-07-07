@@ -24,15 +24,15 @@ export default {
   },
   computed: {
     percent() {
-      return Math.floor(this.fontSize / 2 * 100)
+      return Math.floor(this.fontSize.toFixed(1) * 100)
     },
   },
   methods: {
     increase() {
-      this.$emit('increase', { fontSize: this.fontSize + 0.2 })
+      this.$emit('increase', { fontSize: this.fontSize + 0.1 })
     },
     decrease() {
-      this.$emit('decrease', { fontSize: this.fontSize - 0.2 })
+      this.$emit('decrease', { fontSize: this.fontSize - 0.1 })
     },
   },
 }

@@ -61,7 +61,7 @@ export default {
   justify-content: center;
 
   &_Items {
-    background-color: rgba(#fff, 0.7);
+    background-color: rgba(#fff, 0.9);
     color: #333;
     border-radius: 2px;
     max-height: 50%;

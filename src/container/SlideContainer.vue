@@ -19,21 +19,27 @@ const SlideContainer = {
     isStartPage: {
       type: Boolean,
     },
+    fontSize: {
+      type: Number,
+    },
   },
   render(h) {
     const className = classNameHelper(this)
+    const { fontSize, isStartPage, navigate } = this
     return (
       <section {...className()}>
         <header {...className('Header')}>
           <ScaleSwitcher class="ScaleSwitcher" />
           <ThemeSwitcher class="ThemeSwitcher" />
         </header>
-        <main {...className('Main')}>{this.isStartPage ? <TitlePage /> : <ContentPage />}</main>
+        <main {...className('Main')} style={`font-size: ${fontSize}em;`}>
+          {isStartPage ? <TitlePage /> : <ContentPage />}
+        </main>
         <footer {...className('Footer')}>
-          <PageNavigator onNavigate={this.navigate} class="PageNavigator" />
+          <PageNavigator onNavigate={navigate} class="PageNavigator" />
           <PagePosition class="PagePosition" />
         </footer>
-        <PageJumper class="PageJumper" onNavigate={this.navigate} />
+        <PageJumper class="PageJumper" onNavigate={navigate} />
       </section>
     )
   },
@@ -54,6 +60,9 @@ export default connect({
   gettersToProps: {
     slug: 'slug',
     isStartPage: 'isStartPage',
+  },
+  stateToProps: {
+    fontSize: 'fontSize',
   },
   lifecycle: {
     created({ dispatch, getters }) {

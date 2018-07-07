@@ -6,6 +6,7 @@ export default md => {
     .use(...createContainer('right', ''))
     .use(...createBgImageContainer('bg'))
     .use(...createBgImageContainer('cover'))
+    .use(...createVideoContainer('video'))
 }
 
 function createContainer(klass, defaultTitle) {
@@ -43,6 +44,24 @@ function createBgImageContainer(klass) {
           } ${filter ? 'filter:' + filter + ';' : ''}"></div><div class="foreground">\n`
         } else {
           return `</div></div>\n`
+        }
+      },
+    },
+  ]
+}
+
+function createVideoContainer(klass) {
+  return [
+    container,
+    klass,
+    {
+      render(tokens, idx) {
+        const token = tokens[idx]
+        const [klassName, videoPath] = token.info.trim().split(' ')
+        if (token.nesting === 1) {
+          return `<div class="${klassName} custom-block"><video src="${videoPath}" controls preload="auto"></video>`
+        } else {
+          return '</div>'
         }
       },
     },
