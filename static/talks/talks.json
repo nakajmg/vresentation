@@ -1,6 +1,19 @@
 [
   {
-    "slug": "jsx",
-    "title": "vue with jsx"
+    "slug": "vresentation",
+    "title": "vresentation"
+  },
+  {
+    "slug": "esamd",
+    "title": "esamd"
+  },
+
+  {
+    "slug": "emoji",
+    "title": "emoji"
+  },
+  {
+    "slug": "vue_with_jsx",
+    "title": "Vue with JSX"
   }
 ]
