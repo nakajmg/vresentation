@@ -13,3 +13,12 @@ yarn-error.log*
 *.ntvs*
 *.njsproj
 *.sln
+
+# logs
+npm-debug.log
+
+# Nuxt build
+.nuxt
+
+# Nuxt generate
+dist

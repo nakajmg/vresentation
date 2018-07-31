@@ -1,5 +1,5 @@
 import { shallowMount } from '@vue/test-utils'
-import PagePosition from '../../../src/components/PagePosition.vue'
+import PagePosition from '../../../components/PagePosition.vue'
 
 describe('PagePosition.vue', () => {
   describe('computed', () => {

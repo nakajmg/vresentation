@@ -1,5 +1,5 @@
 import { shallowMount } from '@vue/test-utils'
-import ThemeSwitcher from '../../../src/components/ThemeSwitcher'
+import ThemeSwitcher from '../../../components/ThemeSwitcher'
 
 describe('ThemeSwitcher.vue', () => {
   const propsData = {

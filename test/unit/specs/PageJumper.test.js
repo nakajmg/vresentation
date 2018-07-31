@@ -1,5 +1,5 @@
 import { shallowMount } from '@vue/test-utils'
-import PageJumper from '../../../src/components/PageJumper'
+import PageJumper from '../../../components/PageJumper'
 
 describe('PageJumper.vue', () => {
   const propsData = {
@@ -7,7 +7,7 @@ describe('PageJumper.vue', () => {
     pagesHeading: ['hoge', 'fuga'],
   }
   const methods = {
-    _bindShortcutKey: () => {},
+    _bindShortcutKey: () => { },
   }
   it('visibility', () => {
     const wrapper = shallowMount(PageJumper, {

@@ -1,8 +1,8 @@
 import { shallowMount } from '@vue/test-utils'
-import PageNavigator from '../../../src/components/PageNavigator.vue'
+import PageNavigator from '../../../components/PageNavigator.vue'
 describe('PageNavigator.vue', () => {
   const mockMethods = {
-    _bindShortcutKey: () => {},
+    _bindShortcutKey: () => { },
   }
 
   describe('methods', () => {
