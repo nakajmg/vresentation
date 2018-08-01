@@ -1,4 +1,4 @@
-const generateStaticPaths = require('./generateStaticPaths')
+const generateStaticPaths = require('./scripts/staticPaths')
 module.exports = {
   /*
   ** Headers of the page
@@ -36,7 +36,7 @@ module.exports = {
   },
   plugins: [{ src: '~/plugins/router-sync' }, { src: '~/plugins/mousetrap', ssr: false }],
   env: {
-    baseURL: process.env.NODE_ENV === 'production' ? '' : 'http://localhost:3000',
+    baseURL: process.env.baseURL || 'http://localhost:3000',
   },
   generate: {
     routes: function() {

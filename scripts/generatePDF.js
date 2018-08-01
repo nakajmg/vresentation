@@ -2,15 +2,13 @@ const puppeteer = require('puppeteer')
 const mkdirp = require('mkdirp')
 const del = require('del')
 const pdfMerge = require('easy-pdf-merge')
-const { readFileBySlug } = require('./generateStaticPaths')
-const baseURL = 'http://localhost:3000'
+const { createPathsBySlug } = require('./staticPaths')
+const createServer = require('./server')
 ;(async () => {
+  const server = await createServer()
+  const baseURL = process.env.baseURL
   const slug = process.argv[2]
-  const paths = readFileBySlug({ slug })
-
-  const browser = await puppeteer.launch()
-  const page = await browser.newPage()
-
+  const paths = createPathsBySlug({ slug })
   const dirName = `./pdf/temp`
   await new Promise((resolve, reject) => {
     mkdirp(dirName, err => {
@@ -18,6 +16,10 @@ const baseURL = 'http://localhost:3000'
       else resolve()
     })
   })
+
+  const browser = await puppeteer.launch()
+  const page = await browser.newPage()
+
   const fileNames = []
   for (let index = 0; index < paths.length; index++) {
     await page.goto(`${baseURL}${paths[index]}`, { waitUntil: 'load' })
@@ -37,9 +39,11 @@ const baseURL = 'http://localhost:3000'
         reject(err)
       }
       console.log('generated:', fileName)
-      await del(dirName)
       resolve()
     })
   })
+  await del(dirName)
   await browser.close()
+  await server.close()
+  process.exit(0)
 })()

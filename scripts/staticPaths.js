@@ -17,14 +17,14 @@ function createPaths({ markdown, slug }) {
 module.exports = function() {
   const list = JSON.parse(fs.readFileSync(path.resolve('./static/talks.json'), 'utf-8'))
   const paths = list.map(({ slug }) => {
-    return readFileBySlug({ slug })
+    return createPathsBySlug({ slug })
   })
   return flatten(paths)
 }
 
-function readFileBySlug({ slug }) {
+function createPathsBySlug({ slug }) {
   const markdown = fs.readFileSync(path.resolve(`./static/talks/${slug}/index.md`), 'utf-8')
   return createPaths({ markdown, slug })
 }
 
-module.exports.readFileBySlug = readFileBySlug
+module.exports.createPathsBySlug = createPathsBySlug
