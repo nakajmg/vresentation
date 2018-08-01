@@ -3,7 +3,7 @@ import classNameHelper from '../modules/classNameHelper'
 export default {
   name: 'Renderer',
   props: {
-    pageContent: {
+    content: {
       type: String,
       default: '',
     },
@@ -13,16 +13,19 @@ export default {
     isStartPage: {
       type: Boolean,
     },
-    pageMeta: {
+    meta: {
       type: Object,
+    },
+    filterStyle: {
+      type: String,
     },
   },
   render(h) {
-    const { pageContent, theme, isStartPage, pageMeta } = this.$props
+    const { content, theme, isStartPage, meta, filterStyle } = this.$props
     if (isStartPage) {
-      const { title, author, location, date } = pageMeta
+      const { title, author, location, date } = meta
       return (
-        <div class="TitlePage">
+        <div class="TitlePage" style={filterStyle}>
           <h1 class="TitlePage_Title">{title}</h1>
           <div class="TitlePage_Info">
             {date} {location} {author}
@@ -32,7 +35,8 @@ export default {
     } else {
       return h('div', {
         class: `ContentPage Theme_${theme}`,
-        domProps: { innerHTML: pageContent },
+        style: filterStyle,
+        domProps: { innerHTML: content },
       })
     }
   },

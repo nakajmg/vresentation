@@ -8,18 +8,30 @@ export default {
     return parseInt(route.params.page) || 0
   },
   slug({ route }) {
-    return route.params.slug
+    return route.params.slug || ''
   },
-  parsedMarkdown({ markdown }) {
-    const parsed = frontmatter(markdown)
-    const rendered = mdit.render(parsed.content)
-    return { meta: parsed.data, rendered }
+  currentFile(state, { slug }) {
+    return state.contents.find(content => content.slug === slug)
   },
-  pages(state, { parsedMarkdown }) {
-    return compact(parsedMarkdown.rendered.split('<h2>')).map(content => `<h2>${content}`)
+  currentContent(state, { currentFile }) {
+    if (!currentFile) return { meta: {}, content: '' }
+    const frontMattered = frontmatter(currentFile.markdown)
+    const renderedMarkdown = mdit.render(frontMattered.content)
+    const meta = frontMattered.data || { title: currentFile.slug }
+    if (currentFile.title) {
+      meta.title = currentFile.title
+    }
+    meta.slug = currentFile.slug
+    return {
+      meta,
+      content: renderedMarkdown,
+    }
   },
-  pagesHeading(state, { pages }) {
-    return pages.map(content => {
+  currentPages(state, { currentContent }) {
+    return compact(currentContent.content.split('<h2>')).map(content => `<h2>${content}`)
+  },
+  currentHeading(state, { currentPages }) {
+    return currentPages.map(content => {
       let matched = content.match(heading12)
       if (matched && matched[1] !== '') return matched[1]
       matched = content.match(heading34)
@@ -27,25 +39,17 @@ export default {
       return 'No Heading'
     })
   },
-  pageContent(state, { pages, page }) {
-    return pages[page - 1]
+  currentPageContent(state, { currentPages, page }) {
+    return currentPages[page - 1]
   },
-  pageMeta(state, { parsedMarkdown }) {
-    const { meta, rendered } = parsedMarkdown
-    if (meta === null && rendered === '') return {}
-    if (state.markdown !== '' && meta === null) {
-      const matched = rendered.match(heading12)
-      return {
-        title: matched[1],
-      }
-    }
-    return meta
+  currentContentMeta(state, { currentContent }) {
+    return currentContent.meta
   },
   isStartPage(state, { page }) {
     return page === 0
   },
-  isEndPage(state, { page, pages }) {
-    return page === pages.length
+  isEndPage(state, { page, currentPages }) {
+    return page === currentPages.length
   },
   filterStyle({ filter }) {
     const { brightness, contrast, saturate } = filter

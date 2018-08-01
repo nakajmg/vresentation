@@ -4,6 +4,6 @@ import PageJumper from '../PageJumper.vue'
 export default connect({
   gettersToProps: {
     page: 'page',
-    pagesHeading: 'pagesHeading',
+    pagesHeading: 'currentHeading',
   },
 })(PageJumper)

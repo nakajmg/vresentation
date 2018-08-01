@@ -4,7 +4,7 @@ import PagePosition from '../PagePosition.vue'
 export default connect({
   gettersToProps: {
     page: 'page',
-    pages: 'pages',
+    pages: 'currentPages',
   },
   stateToProps: {
     theme: 'theme',

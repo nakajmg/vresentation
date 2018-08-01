@@ -64,7 +64,9 @@ export default {
 <style lang="scss" scoped>
 .ScreenFilter {
   user-select: none;
-
+  display: inline-flex;
+  flex-direction: column;
+  padding: 1em;
   &_Item {
     display: flex;
     justify-content: flex-end;

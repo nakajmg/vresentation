@@ -62,9 +62,12 @@ const SlideContainer = {
       </section>
     )
   },
+  mounted() {
+    this._bindShortcutKey()
+  },
   methods: {
     _bindShortcutKey() {
-      this.$mousetrap.bind('ctrl+s', this.toggleSettingsVisibility)
+      this.$mousetrap.bind('ctrl+f', this.toggleSettingsVisibility)
     },
     navigate({ page }) {
       const name = page === 0 ? 'slug' : 'slug-page'
@@ -96,11 +99,6 @@ export default connect({
   },
   mutationsToEvents: {
     [types.SET_VISIBILITY]: types.SET_VISIBILITY,
-  },
-  lifecycle: {
-    created({ dispatch, getters }) {
-      return dispatch(types.FETCH_MARKDOWN, { slug: getters.slug })
-    },
   },
 })(SlideContainer)
 </script>
@@ -136,14 +134,19 @@ body {
 
   &.Theme_Dark {
     color: #fff;
-    background-color: rgb(38, 34, 35);
+    background-color: #262223;
   }
 
+  &.Theme_Light &_Header {
+    background-color: rgba(#f2f2f2, 0.8);
+  }
+  &.Theme_Dark &_Header {
+    background-color: rgba(#262223, 0.8);
+  }
   &_Header {
     position: absolute;
     top: 0;
-    left: 0;
-    width: 100%;
+    right: 0;
     z-index: 10;
     padding-right: 1rem;
     padding-top: 1rem;

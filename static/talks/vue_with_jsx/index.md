@@ -83,6 +83,7 @@ export default {
 ### 一度書いてみなって
 :::
 
+##
 
 ```js
 import {mapState, mapMutations} from 'vuex'
@@ -104,6 +105,8 @@ export default {
   </div>
 </template>
 ```
+
+##
 
 
 ```js

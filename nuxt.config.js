@@ -1,3 +1,5 @@
+const fs = require('fs')
+const path = require('path')
 module.exports = {
   /*
   ** Headers of the page
@@ -33,14 +35,23 @@ module.exports = {
           exclude: /(node_modules)/
         })
       }
-    }
+    },
   },
   plugins: [
     { src: '~/plugins/router-sync' },
     { src: '~/plugins/mousetrap', ssr: false }
   ],
   env: {
-    baseURL: process.env.NODE_ENV === 'production' ? '' : 'http://localhost:3000'
+  baseURL: process.env.NODE_ENV === 'production' ? '' : 'http://localhost:3000'
+},
+generate: {
+  routes: async function () {
+    const list = fs.readdirSync(path.resolve('./static/talks'))
+    console.log(list)
+    return list.map((dirname) => {
+      return dirname
+    })
   },
+}
 }
 

@@ -18,7 +18,7 @@ hello!
 
 ## mp4
 
-::: video /static/talks/vresentation/video.mp4
+::: video /talks/vresentation/video.mp4
 
 :::
 

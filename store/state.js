@@ -11,4 +11,5 @@ export default {
   visibility: {
     settings: false,
   },
+  contents: [],
 }

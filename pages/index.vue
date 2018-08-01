@@ -1,12 +1,25 @@
-<template>
-  <section class="container">
-    <div>
-      <h1 class="title">
-        vresentation
-      </h1>
-    </div>
-  </section>
-</template>
+<script>
+import TalkList from '../components/TalkList'
+import { connect } from 'vuex-connect'
+const ConnectedTalkList = connect({
+  stateToProps: ['contents'],
+})(TalkList)
+
+export default {
+  name: 'IndexPage',
+  render(h) {
+    return (
+      <section class="container">
+        <div>
+          <h1 class="title">vresentation</h1>
+          <ConnectedTalkList />
+        </div>
+      </section>
+    )
+  },
+}
+</script>
+
 
 <style>
 .container {
