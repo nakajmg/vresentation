@@ -9,13 +9,7 @@ const baseURL = 'http://localhost:3000'
   const paths = readFileBySlug({ slug })
 
   const browser = await puppeteer.launch()
-  // use tor
-  //const browser = await puppeteer.launch({args:['--proxy-server=socks5://127.0.0.1:9050']});
   const page = await browser.newPage()
-  // page.on('request', request => {
-  //   console.log(`Intercepting: ${request.method} ${request.url}`)
-  //   request.continue()
-  // })
 
   const dirName = `./pdf/temp`
   await new Promise((resolve, reject) => {
@@ -47,13 +41,5 @@ const baseURL = 'http://localhost:3000'
       resolve()
     })
   })
-  // await page.goto(url, { waitUntil: 'load' })
-
-  //const title = await page.title();
-  //console.log(title);
-  // await page.screenshot({ path: 'example.png' })
-  // const html = await page.content()
-  // console.log(html)
-  // fs.writeFileSync('./test.html', html)
   await browser.close()
 })()
