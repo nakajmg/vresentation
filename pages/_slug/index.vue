@@ -7,5 +7,10 @@ export default {
   render(h) {
     return <Renderer />
   },
+  head() {
+    return {
+      title: this.$store.getters.currentContentMeta.title,
+    }
+  },
 }
 </script>
