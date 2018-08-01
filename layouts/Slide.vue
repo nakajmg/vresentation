@@ -204,5 +204,12 @@ body {
     right: 0;
     background-color: rgba(0, 0, 0, 0.1);
   }
+  @media print {
+    &_Header,
+    .PageJumper,
+    &_Footer {
+      display: none;
+    }
+  }
 }
 </style>
