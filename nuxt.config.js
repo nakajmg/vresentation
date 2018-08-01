@@ -1,5 +1,4 @@
-const fs = require('fs')
-const path = require('path')
+const generateStaticPaths = require('./generateStaticPaths')
 module.exports = {
   /*
   ** Headers of the page
@@ -9,11 +8,9 @@ module.exports = {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: 'Nuxt.js project' }
+      { hid: 'description', name: 'description', content: 'Nuxt.js project' },
     ],
-    link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
-    ]
+    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
   },
   /*
   ** Customize the progress bar color
@@ -32,26 +29,18 @@ module.exports = {
           enforce: 'pre',
           test: /\.(js|vue)$/,
           loader: 'eslint-loader',
-          exclude: /(node_modules)/
+          exclude: /(node_modules)/,
         })
       }
     },
   },
-  plugins: [
-    { src: '~/plugins/router-sync' },
-    { src: '~/plugins/mousetrap', ssr: false }
-  ],
+  plugins: [{ src: '~/plugins/router-sync' }, { src: '~/plugins/mousetrap', ssr: false }],
   env: {
-  baseURL: process.env.NODE_ENV === 'production' ? '' : 'http://localhost:3000'
-},
-generate: {
-  routes: async function () {
-    const list = fs.readdirSync(path.resolve('./static/talks'))
-    console.log(list)
-    return list.map((dirname) => {
-      return dirname
-    })
+    baseURL: process.env.NODE_ENV === 'production' ? '' : 'http://localhost:3000',
+  },
+  generate: {
+    routes: function() {
+      return generateStaticPaths()
+    },
   },
 }
-}
-
