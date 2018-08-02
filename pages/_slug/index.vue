@@ -12,33 +12,11 @@ export default {
   },
   head() {
     return {
-      title: this.meta.title,
+      title: this.$store.getters.meta,
     }
   },
   render(h) {
-    return <Renderer meta={this.meta} content={this.currentPage} isStartPage={this.isStartPage} />
-  },
-  computed: {
-    ...mapGetters({
-      currentContent: 'currentContent',
-    }),
-    meta() {
-      if (!this.currentContent) return { title: '' }
-      return this.currentContent.meta
-    },
-    currentPages() {
-      if (!this.currentContent) return
-      return pageSplitter(this.currentContent.content)
-    },
-    currentPage() {
-      if (!this.currentPages) return ''
-      const page = parseInt(this.$route.params.page) || 0
-      return this.currentPages[page - 1]
-    },
-    isStartPage() {
-      const page = parseInt(this.$route.params.page) || 0
-      return page === 0
-    },
+    return <Renderer />
   },
 }
 </script>

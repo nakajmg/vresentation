@@ -24,8 +24,15 @@ export default {
       meta,
     }
   },
+  meta(state, { currentContent }) {
+    if (!currentContent) return { title: '' }
+    return currentContent.meta
+  },
   currentPages(state, { currentContent }) {
     return pageSplitter(currentContent.content)
+  },
+  content(state, { currentPages, page }) {
+    return currentPages[page - 1]
   },
   currentHeading(state, { currentPages }) {
     return currentPages.map(content => {
