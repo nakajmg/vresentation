@@ -1,10 +1,12 @@
 import types from './types'
+import findIndex from 'lodash/findIndex'
 export default {
   [types.SET_CONTENTS](state, { contents }) {
     state.contents = contents
   },
-  [types.SET_MARKDOWN](state, { markdown }) {
+  [types.SET_MARKDOWN](state, { markdown, slug }) {
     state.markdown = markdown
+    state.currentSlug = slug
   },
   [types.SET_THEME](state, { theme }) {
     state.theme = theme

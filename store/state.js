@@ -1,5 +1,4 @@
 export default {
-  markdown: '',
   theme: 'Light',
   fontSize: 1,
   themes: ['Light', 'Dark'],
@@ -12,4 +11,6 @@ export default {
     settings: false,
   },
   contents: [],
+  markdown: null,
+  currentSlug: null,
 }

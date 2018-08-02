@@ -1,25 +1,16 @@
 import types from './types'
 import axios from 'axios'
+const baseURL = process.server ? process.env.baseURL : ''
 export default {
-  async [types.NUXT_SERVER_INIT]({ commit, dispatch, getters }) {
-    const json = await axios.get(`${process.env.baseURL}/talks.json`).then(res => res.data)
-    const contents = await Promise.all(
-      json.map(meta => {
-        return axios
-          .get(`${process.env.baseURL}/talks/${meta.slug}/index.md`)
-          .then(res => res.data)
-          .then(markdown => {
-            meta.markdown = markdown
-            return meta
-          })
-      }),
-    )
-    return commit(types.SET_CONTENTS, { contents })
+  async [types.NUXT_SERVER_INIT]({ commit, dispatch }, { params }) {
+    const { slug } = params
+    const contents = await axios.get(`${baseURL}/talks.json`).then(res => res.data)
+    commit(types.SET_CONTENTS, { contents })
+    if (slug) return dispatch(types.FETCH_MARKDOWN, { slug })
   },
-  async [types.FETCH_MARKDOWN]({ commit }, { slug }) {
-    const markdown = await axios
-      .get(`${process.env.baseURL}/talks/${slug}/index.md`)
-      .then(res => res.data)
-    return commit(types.SET_MARKDOWN, { markdown })
+  async [types.FETCH_MARKDOWN]({ commit, state }, { slug }) {
+    if (state.currentSlug === slug) return
+    const markdown = await axios.get(`${baseURL}/talks/${slug}/index.md`).then(res => res.data)
+    return commit(types.SET_MARKDOWN, { markdown, slug })
   },
 }

@@ -3,9 +3,6 @@ import Renderer from '../Renderer.vue'
 
 export default connect({
   gettersToProps: {
-    meta: 'currentContentMeta',
-    content: 'currentPageContent',
-    isStartPage: 'isStartPage',
     filterStyle: 'filterStyle',
   },
   stateToProps: {
