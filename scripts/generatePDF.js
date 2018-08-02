@@ -17,17 +17,18 @@ const createServer = require('./server')
     })
   })
 
-  const browser = await puppeteer.launch()
+  const browser = await puppeteer.launch({ ignoreHTTPSErrors: true, headless: true })
   const page = await browser.newPage()
 
   const fileNames = []
   for (let index = 0; index < paths.length; index++) {
-    await page.goto(`${baseURL}${paths[index]}`, { waitUntil: 'load' })
+    await page.goto(`${baseURL}${paths[index]}`, {
+      waitUntil: 'load',
+    })
     const fileName = `${dirName}/${slug}_${index}.pdf`
-    await page.pdf({ path: fileName, width: 1280, height: 720 })
-    console.clear()
-    const percentage = (index / (paths.length - 1)) * 100
-    console.log(`${percentage}% done`)
+    await page.pdf({ path: fileName, width: 1280, height: 720, printBackground: true })
+    const percentage = ((index / (paths.length - 1)) * 100).toFixed()
+    console.log(`${index + 1}/${paths.length} ${percentage}%`)
     fileNames.push(fileName)
   }
 
@@ -38,7 +39,7 @@ const createServer = require('./server')
         console.log(err)
         reject(err)
       }
-      console.log('generated:', fileName)
+      console.log('done', fileName)
       resolve()
     })
   })

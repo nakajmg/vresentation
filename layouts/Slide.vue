@@ -112,10 +112,6 @@ export default connect({
 
 <style>
 body {
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell,
-    Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   height: 100vh;
   margin: 0;
 }
@@ -133,6 +129,9 @@ body {
 
 <style lang="scss">
 .SlideContainer {
+  font-family: 'corpmin';
+  background-color: #f2f2f2;
+  color: #333;
   &.Theme_Light {
     background-color: #f2f2f2;
     color: #333;

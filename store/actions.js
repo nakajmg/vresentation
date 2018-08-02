@@ -1,16 +1,16 @@
 import types from './types'
-import axios from 'axios'
-const baseURL = process.server ? process.env.baseURL : ''
+import request from '../modules/request'
+
 export default {
-  async [types.NUXT_SERVER_INIT]({ commit, dispatch }, { params }) {
-    const { slug } = params
-    const contents = await axios.get(`${baseURL}/talks.json`).then(res => res.data)
+  async [types.NUXT_SERVER_INIT]({ commit }) {
+    const filePath = process.server ? './static/talks.json' : `/talks.json`
+    const contents = await request(filePath)
     commit(types.SET_CONTENTS, { contents })
-    if (slug) return dispatch(types.FETCH_MARKDOWN, { slug })
   },
   async [types.FETCH_MARKDOWN]({ commit, state }, { slug }) {
     if (state.currentSlug === slug) return
-    const markdown = await axios.get(`${baseURL}/talks/${slug}/index.md`).then(res => res.data)
+    const filePath = process.server ? `./static/talks/${slug}/index.md` : `/talks/${slug}/index.md`
+    const markdown = await request(filePath)
     return commit(types.SET_MARKDOWN, { markdown, slug })
   },
 }
