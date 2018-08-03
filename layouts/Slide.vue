@@ -15,9 +15,6 @@ const SlideContainer = {
     slug: {
       type: String,
     },
-    isStartPage: {
-      type: Boolean,
-    },
     fontSize: {
       type: Number,
     },
@@ -33,15 +30,7 @@ const SlideContainer = {
   },
   render(h) {
     const className = classNameHelper(this)
-    const {
-      fontSize,
-      isStartPage,
-      navigate,
-      theme,
-      filterStyle,
-      visibility,
-      toggleSettingsVisibility,
-    } = this
+    const { fontSize, navigate, theme, filterStyle, visibility, toggleSettingsVisibility } = this
     return (
       <section {...className(null, `Theme_${theme}`)}>
         <no-ssr>
@@ -94,14 +83,13 @@ const SlideContainer = {
 
 export default connect({
   gettersToProps: {
-    slug: 'slug',
-    isStartPage: 'isStartPage',
     filterStyle: 'filterStyle',
   },
   stateToProps: {
     fontSize: 'fontSize',
     theme: 'theme',
     visibility: 'visibility',
+    slug: 'slug',
   },
   mutationsToEvents: {
     [types.SET_VISIBILITY]: types.SET_VISIBILITY,

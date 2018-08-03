@@ -10,7 +10,7 @@ export default {
     theme: {
       type: String,
     },
-    isStartPage: {
+    hasPrevPage: {
       type: Boolean,
     },
     meta: {
@@ -21,8 +21,8 @@ export default {
     },
   },
   render(h) {
-    const { content, theme, isStartPage, meta, filterStyle } = this.$props
-    if (isStartPage) {
+    const { content, theme, hasPrevPage, meta, filterStyle } = this.$props
+    if (!hasPrevPage) {
       const { title, author, location, date } = meta
       return (
         <div class="TitlePage" style={filterStyle}>

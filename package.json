@@ -57,6 +57,7 @@
     "eslint-friendly-formatter": "^3.0.0",
     "eslint-loader": "^1.7.1",
     "eslint-plugin-vue": "^4.0.0",
+    "ip": "^1.1.5",
     "jest": "^22.0.4",
     "jest-serializer-vue": "^0.3.0",
     "mkdirp": "^0.5.1",

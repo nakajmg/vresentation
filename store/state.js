@@ -12,7 +12,12 @@ export default () => {
       settings: false,
     },
     contents: [],
-    markdown: null,
-    currentSlug: null,
+    content: '',
+    hasNextPage: null,
+    hasPrevPage: null,
+    meta: {},
+    page: 0,
+    pageLength: 0,
+    slug: '',
   }
 }

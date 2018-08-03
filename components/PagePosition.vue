@@ -6,8 +6,8 @@ export default {
     page: {
       type: Number,
     },
-    pages: {
-      type: Array,
+    pageLength: {
+      type: Number,
     },
     theme: {
       type: String,
@@ -15,7 +15,7 @@ export default {
   },
   computed: {
     position() {
-      return this.page / this.pages.length * 100
+      return this.page / this.pageLength * 100
     },
   },
   render(h) {

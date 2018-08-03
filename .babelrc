@@ -1,15 +1,9 @@
 {
-  "presets": [
-    "vue-app"
-  ],
-  "plugins": [
-    "lodash"
-  ],
+  "presets": ["vue-app"],
+  "plugins": ["lodash"],
   "env": {
     "test": {
-      "presets": [
-        "vue-app"
-      ]
+      "presets": ["vue-app"]
     }
   }
 }

@@ -1,5 +1,4 @@
 import types from './types'
-import findIndex from 'lodash/findIndex'
 export default {
   [types.SET_CONTENTS](state, { contents }) {
     state.contents = contents
@@ -23,5 +22,8 @@ export default {
   },
   [types.SET_VISIBILITY](state, { type, value }) {
     state.visibility[type] = value
+  },
+  [types.SET_RESPONSE](state, response) {
+    Object.assign(state, response)
   },
 }

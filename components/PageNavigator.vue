@@ -13,28 +13,28 @@ export default {
     page: {
       type: Number,
     },
-    isStartPage: {
+    hasPrevPage: {
       type: Boolean,
-      default: false,
+      default: true,
     },
-    isEndPage: {
+    hasNextPage: {
       type: Boolean,
-      default: false,
+      default: true,
     },
   },
   components: {
     Icon,
   },
   render(h) {
-    const { toPrev, toNext, page, isStartPage, isEndPage } = this
+    const { toPrev, toNext, page, hasPrevPage, hasNextPage } = this
     const className = classNameHelper(this)
     return (
       <nav {...className()}>
-        <a {...className('Button')} onClick={toPrev} disabled={isStartPage}>
+        <a {...className('Button')} onClick={toPrev} disabled={!hasPrevPage}>
           <Icon icon="angle-left" />
         </a>
         <span {...className('Counter')}>{page}</span>
-        <a {...className('Button')} onClick={toNext} disabled={isEndPage}>
+        <a {...className('Button')} onClick={toNext} disabled={!hasNextPage}>
           <Icon icon="angle-right" />
         </a>
       </nav>
