@@ -2,14 +2,14 @@
 export default {
   name: 'TalkList',
   props: {
-    contents: {
+    contentsList: {
       type: Array,
     },
   },
   render(h) {
     return (
       <ul class="TalkList">
-        {this.contents.map(({ slug, title }) => (
+        {this.contentsList.map(({ slug, title }) => (
           <li>
             <router-link to={{ name: 'slug', params: { slug } }}>{title}</router-link>
           </li>

@@ -1,12 +1,5 @@
 import types from './types'
 export default {
-  [types.SET_CONTENTS](state, { contents }) {
-    state.contents = contents
-  },
-  [types.SET_MARKDOWN](state, { markdown, slug }) {
-    state.markdown = markdown
-    state.currentSlug = slug
-  },
   [types.SET_THEME](state, { theme }) {
     state.theme = theme
   },
@@ -28,5 +21,8 @@ export default {
   },
   [types.SET_HEADING](state, heading) {
     state.heading = heading
+  },
+  [types.SET_CONTENTS_LIST](state, contentsList) {
+    state.contentsList = contentsList
   },
 }

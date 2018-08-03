@@ -1,16 +1,29 @@
 import types from './types'
 import request from '../modules/request'
-
+const baseURL = `${process.server ? process.env.baseURL : ''}/api`
+const cache = new Map()
 export default {
-  async [types.NUXT_SERVER_INIT]({ commit }) {
-    const filePath = process.server ? './talks.json' : `/talks.json`
-    const contents = await request(filePath)
-    commit(types.SET_CONTENTS, { contents })
+  async [types.NUXT_SERVER_INIT]({ commit }) {},
+  async [types.FETCH_CONTENTS_LIST]({ commit }) {
+    const filePath = `${baseURL}/list`
+    const contentsList = await request(filePath)
+    return commit(types.SET_CONTENTS_LIST, contentsList)
   },
-  async [types.FETCH_MARKDOWN]({ commit, state }, { slug, page }) {
-    if (state.currentSlug === slug) return
-    const filePath = process.server ? `./talks/${slug}/index.md` : `/talks/${slug}/index.md`
-    const markdown = await request(filePath)
-    return commit(types.SET_MARKDOWN, { markdown, slug })
+  async [types.FETCH_CONTENT]({ commit, state }, { slug, page }) {
+    const filePath = `${baseURL}/${slug}/${page}`
+    const cacheResponse = cache.get(filePath)
+    if (cacheResponse) return commit(types.SET_RESPONSE, cacheResponse)
+    const response = await request(filePath)
+    cache.set(filePath, response)
+    return commit(types.SET_RESPONSE, response)
+  },
+  async [types.FETCH_HEADING]({ commit, state }, { slug }) {
+    if (state.heading.length !== 0 && state.slug === slug) return
+    const filePath = `${baseURL}/${slug}/heading`
+    const cacheResponse = cache.get(filePath)
+    if (cacheResponse) return commit(types.SET_HEADING, cacheResponse)
+    const heading = await request(filePath)
+    cache.set(filePath, heading)
+    return commit(types.SET_HEADING, heading)
   },
 }

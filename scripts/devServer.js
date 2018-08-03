@@ -11,6 +11,8 @@ const config = require('../nuxt.config.js')
   await new Builder(nuxt).build()
   const port = 3000
   await app.listen({ port })
+  process.env['dev'] = true
+  process.env['baseURL'] = `http://localhost:${port}`
   console.log(`> local   : http://localhost:${port}/`)
   console.log(`> external: http://${ip.address()}:${port}/\n`)
 })()

@@ -7,7 +7,7 @@ const pageSplitter = require('./pageSplitter')
 const baseDir = __dirname + '/../../talks'
 const { heading12, heading34 } = require('./markdown/regex')
 
-router.get('/', (req, res) => {
+router.get('/list', (req, res) => {
   res.header('Content-Type', 'application/json; charset=utf-8')
   try {
     const talks = fs.readFileSync(`${baseDir}.json`)

@@ -11,7 +11,7 @@ export default () => {
     visibility: {
       settings: false,
     },
-    contents: [],
+    contentsList: [],
     content: '',
     hasNextPage: null,
     hasPrevPage: null,

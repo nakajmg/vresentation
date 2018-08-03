@@ -1,8 +1,11 @@
 <script>
 import TalkList from '../components/TalkList'
 import { connect } from 'vuex-connect'
+import types from '../store/types'
 const ConnectedTalkList = connect({
-  stateToProps: ['contents'],
+  stateToProps: {
+    contentsList: 'contentsList',
+  },
 })(TalkList)
 
 export default {
@@ -16,6 +19,9 @@ export default {
         </div>
       </section>
     )
+  },
+  fetch({ store }) {
+    return store.dispatch(types.FETCH_CONTENTS_LIST)
   },
 }
 </script>
