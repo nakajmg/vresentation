@@ -69,7 +69,7 @@ export default {
   user-select: none;
 
   &_Button {
-    appearance: none;
+    -webkit-appearance: none;
     background: none;
     outline: none;
     border: none;

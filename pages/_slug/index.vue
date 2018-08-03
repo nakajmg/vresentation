@@ -10,10 +10,11 @@ export default {
   async fetch({ store, params }) {
     const { slug } = params
     const page = parseInt(params.page) || 0
-    console.log(slug, page)
     const baseURL = process.server ? 'http://localhost:3000/api' : '/api'
     const response = await axios.get(`${baseURL}/${slug}/${page}`).then(res => res.data)
     store.commit(types.SET_RESPONSE, response)
+    const heading = await axios.get(`${baseURL}/${slug}/heading`).then(res => res.data)
+    store.commit(types.SET_HEADING, heading)
   },
   head() {
     return this.$store.state.meta

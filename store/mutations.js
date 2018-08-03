@@ -26,4 +26,7 @@ export default {
   [types.SET_RESPONSE](state, response) {
     Object.assign(state, response)
   },
+  [types.SET_HEADING](state, heading) {
+    state.heading = heading
+  },
 }

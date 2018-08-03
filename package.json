@@ -65,6 +65,7 @@
     "portfinder": "^1.0.13",
     "puppeteer": "^1.6.1",
     "sass-loader": "^7.0.3",
+    "striptags": "^3.1.1",
     "stylus-loader": "^3.0.2",
     "vue-jest": "^1.0.2"
   },

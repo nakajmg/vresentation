@@ -19,5 +19,6 @@ export default () => {
     page: 0,
     pageLength: 0,
     slug: '',
+    heading: [],
   }
 }

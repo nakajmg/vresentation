@@ -4,10 +4,10 @@ import PageJumper from '../../../components/PageJumper'
 describe('PageJumper.vue', () => {
   const propsData = {
     page: 1,
-    pagesHeading: ['hoge', 'fuga'],
+    heading: ['hoge', 'fuga'],
   }
   const methods = {
-    _bindShortcutKey: () => { },
+    _bindShortcutKey: () => {},
   }
   it('visibility', () => {
     const wrapper = shallowMount(PageJumper, {
