@@ -21,16 +21,13 @@ const SlideContainer = {
     theme: {
       type: String,
     },
-    filterStyle: {
-      type: String,
-    },
     visibility: {
       type: Object,
     },
   },
   render(h) {
     const className = classNameHelper(this)
-    const { fontSize, navigate, theme, filterStyle, visibility, toggleSettingsVisibility } = this
+    const { fontSize, navigate, theme, visibility, toggleSettingsVisibility } = this
     return (
       <section {...className(null, `Theme_${theme}`)}>
         <no-ssr>
@@ -82,9 +79,6 @@ const SlideContainer = {
 }
 
 export default connect({
-  gettersToProps: {
-    filterStyle: 'filterStyle',
-  },
   stateToProps: {
     fontSize: 'fontSize',
     theme: 'theme',
