@@ -16,16 +16,22 @@ export default {
     meta: {
       type: Object,
     },
-    filterStyle: {
-      type: String,
+    filter: {
+      type: Object,
+    },
+  },
+  computed: {
+    filterStyle() {
+      const { brightness, contrast, saturate } = this.filter
+      return `filter: brightness(${brightness}) contrast(${contrast}) saturate(${saturate});`
     },
   },
   render(h) {
-    const { content, theme, hasPrevPage, meta, filterStyle } = this.$props
+    const { content, theme, hasPrevPage, meta } = this.$props
     if (!hasPrevPage) {
       const { title, author, location, date } = meta
       return (
-        <div class="TitlePage" style={filterStyle}>
+        <div class="TitlePage" style={this.filterStyle}>
           <h1 class="TitlePage_Title">{title}</h1>
           <div class="TitlePage_Info">
             {date} {location} {author}
@@ -35,7 +41,7 @@ export default {
     } else {
       return h('div', {
         class: `ContentPage Theme_${theme}`,
-        style: filterStyle,
+        style: this.filterStyle,
         domProps: { innerHTML: content },
       })
     }
