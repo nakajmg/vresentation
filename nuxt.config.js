@@ -36,7 +36,7 @@ module.exports = {
   },
   plugins: [{ src: '~/plugins/router-sync' }, { src: '~/plugins/mousetrap', ssr: false }],
   env: {
-    baseURL: process.env.baseURL || 'http://localhost:3000',
+    baseURL: process.env.baseURL,
   },
   generate: {
     routes: function() {

@@ -30,27 +30,21 @@ const SlideContainer = {
     const { fontSize, navigate, theme, visibility, toggleSettingsVisibility } = this
     return (
       <section {...className(null, `Theme_${theme}`)}>
-        <no-ssr>
-          <header {...className('Header')}>
-            <span class="SettingsCog" onClick={toggleSettingsVisibility}>
-              <Icon icon="cog" />
-            </span>
-            <ThemeSwitcher class="ThemeSwitcher" style={vShow(visibility.settings)} />
-            <ScreenFilter class="ScreenFilter" style={vShow(visibility.settings)} />
-          </header>
-        </no-ssr>
+        <header {...className('Header')}>
+          <span class="SettingsCog" onClick={toggleSettingsVisibility}>
+            <Icon icon="cog" />
+          </span>
+          <ThemeSwitcher class="ThemeSwitcher" style={vShow(visibility.settings)} />
+          <ScreenFilter class="ScreenFilter" style={vShow(visibility.settings)} />
+        </header>
         <main {...className('Main')}>
           <nuxt />
         </main>
-        <no-ssr>
-          <footer {...className('Footer')}>
-            <PageNavigator onNavigate={navigate} class="PageNavigator" />
-            <PagePosition class="PagePosition" />
-          </footer>
-        </no-ssr>
-        <no-ssr>
-          <PageJumper class="PageJumper" onNavigate={navigate} />
-        </no-ssr>
+        <footer {...className('Footer')}>
+          <PageNavigator onNavigate={navigate} class="PageNavigator" />
+          <PagePosition class="PagePosition" />
+        </footer>
+        <PageJumper class="PageJumper" onNavigate={navigate} />
       </section>
     )
   },

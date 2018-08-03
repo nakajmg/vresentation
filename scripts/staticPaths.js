@@ -15,7 +15,7 @@ function createPaths({ markdown, slug }) {
 }
 
 module.exports = function() {
-  const list = JSON.parse(fs.readFileSync(path.resolve('./static/talks.json'), 'utf-8'))
+  const list = JSON.parse(fs.readFileSync(path.resolve('./static/api/list.json'), 'utf-8'))
   const paths = list.map(({ slug }) => {
     return createPathsBySlug({ slug })
   })
@@ -23,7 +23,7 @@ module.exports = function() {
 }
 
 function createPathsBySlug({ slug }) {
-  const markdown = fs.readFileSync(path.resolve(`./static/talks/${slug}/index.md`), 'utf-8')
+  const markdown = fs.readFileSync(path.resolve(`./talks/${slug}/index.md`), 'utf-8')
   return createPaths({ markdown, slug })
 }
 

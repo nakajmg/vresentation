@@ -14,7 +14,9 @@ export default {
     await store.dispatch(types.FETCH_CONTENT, { slug, page })
   },
   head() {
-    return this.$store.state.meta
+    return {
+      title: this.$store.state.meta.title,
+    }
   },
   render(h) {
     return <Renderer />
