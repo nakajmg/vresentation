@@ -30,13 +30,13 @@ export default {
     const className = classNameHelper(this)
     return (
       <nav {...className()}>
-        <a {...className('Button')} onClick={toPrev} disabled={!hasPrevPage}>
+        <button {...className('Button')} onClick={toPrev} disabled={!hasPrevPage}>
           <Icon icon="angle-left" />
-        </a>
+        </button>
         <span {...className('Counter')}>{page}</span>
-        <a {...className('Button')} onClick={toNext} disabled={!hasNextPage}>
+        <button {...className('Button')} onClick={toNext} disabled={!hasNextPage}>
           <Icon icon="angle-right" />
-        </a>
+        </button>
       </nav>
     )
   },
@@ -49,12 +49,10 @@ export default {
       this.$mousetrap.bind(['left', 'shift+space'], this.toPrev)
     },
     toNext() {
-      if (this.isEndPage) return
-      this.navigate({ page: this.page + 1 })
+      if (this.hasNextPage) this.navigate({ page: this.page + 1 })
     },
     toPrev() {
-      if (this.isStartPage) return
-      this.navigate({ page: this.page - 1 })
+      if (this.hasPrevPage) this.navigate({ page: this.page - 1 })
     },
     navigate({ page }) {
       this.$emit('navigate', { page })
@@ -71,6 +69,10 @@ export default {
   user-select: none;
 
   &_Button {
+    appearance: none;
+    background: none;
+    outline: none;
+    border: none;
     font-size: 2.5em;
     opacity: 0.3;
     margin: 0.3em;

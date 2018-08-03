@@ -81,7 +81,7 @@ export default {
 
   font-size: 3.4vw;
   font-family: corpmin;
-  padding: 3vh 3vw;
+  padding: 4vh 3vw;
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
