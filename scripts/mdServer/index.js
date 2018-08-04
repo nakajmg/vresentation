@@ -7,6 +7,16 @@ const pageSplitter = require('./pageSplitter')
 const baseDir = __dirname + '/../../talks'
 const { heading12, heading34 } = require('./markdown/regex')
 
+function getContents({ slug }) {
+  const markdown = fs.readFileSync(`${baseDir}/${slug}/index.md`, 'utf-8')
+  const parsed = parseMarkdown(markdown)
+  const pages = pageSplitter(parsed.content)
+  return {
+    meta: parsed.meta,
+    pages,
+  }
+}
+
 router.get('/list', (req, res) => {
   res.header('Content-Type', 'application/json; charset=utf-8')
   try {
@@ -22,13 +32,12 @@ router.get('/:slug', (req, res) => {
   res.header('Content-Type', 'application/json; charset=utf-8')
   const params = req.params
   const slug = params.slug
-  const markdown = fs.readFileSync(`${baseDir}/${slug}/index.md`, 'utf-8')
-  const parsed = parseMarkdown(markdown)
-  const pages = pageSplitter(parsed.content)
+  const { meta, pages } = getContents({ slug })
   const page = 0
   res.send({
     slug,
     page,
+    meta,
     contents: pages,
     pageLength: pages.length,
     hasNextPage: page < pages.length,
@@ -38,9 +47,7 @@ router.get('/:slug', (req, res) => {
 router.get('/:slug/heading', ({ params }, res) => {
   res.header('Content-Type', 'application/json; charset=utf-8')
   const slug = params.slug
-  const markdown = fs.readFileSync(`${baseDir}/${slug}/index.md`, 'utf-8')
-  const parsed = parseMarkdown(markdown)
-  const pages = pageSplitter(parsed.content)
+  const { pages } = getContents({ slug })
   const heading = pages.map(content => {
     let matched = content.match(heading12)
     if (matched && matched[1] !== '') return striptags(matched[1])
@@ -55,15 +62,13 @@ router.get('/:slug/:page', ({ params }, res) => {
   res.header('Content-Type', 'application/json; charset=utf-8')
   const slug = params.slug
   const page = parseInt(params.page)
-  const markdown = fs.readFileSync(`${baseDir}/${slug}/index.md`, 'utf-8')
-  const parsed = parseMarkdown(markdown)
-  const pages = pageSplitter(parsed.content)
+  const { meta, pages } = getContents({ slug })
   const content = pages[page - 1] || ''
   res.send({
     slug,
     page,
     content,
-    meta: parsed.meta,
+    meta,
     pageLength: pages.length,
     hasNextPage: page < pages.length,
     hasPrevPage: page > 0,

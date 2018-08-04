@@ -5,7 +5,7 @@
   "author": "nakajmg <nakajima.jmg@gmail.com>",
   "private": true,
   "scripts": {
-    "dev": "nuxt",
+    "dev": "node ./scripts/devServer.js",
     "build": "nuxt build",
     "start": "nuxt start",
     "generate": "nuxt generate",
