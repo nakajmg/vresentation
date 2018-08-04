@@ -1,6 +1,8 @@
-const fs = require('fs')
+const fs = require('fs-extra')
 const path = require('path')
+const del = require('del')
 const striptags = require('striptags')
+const copyAssets = require('./copyAssets')
 const parseMarkdown = require('./mdServer/parseMarkdown')
 const pageSplitter = require('./mdServer/pageSplitter')
 const { heading12, heading34 } = require('./mdServer/markdown/regex')
@@ -18,15 +20,12 @@ const mkdir = async dirName => {
 }
 
 function createContentsList() {
-  const filePath = `${distDir}/list.json`
   try {
     const list = JSON.parse(fs.readFileSync(`${baseDir}.json`, 'utf-8'))
-    fs.writeFileSync(filePath, JSON.stringify(list))
     return list
   } catch (e) {
     const ret = fs.readdirSync(baseDir)
     const list = ret.map(slug => ({ slug, title: slug }))
-    fs.writeFileSync(filePath, JSON.stringify(list))
     return list
   }
 }
@@ -64,8 +63,13 @@ function createContents(slug) {
 ;(async () => {
   await mkdirp(distDir)
   const list = createContentsList()
+  await copyAssets()
+  fs.writeFileSync(`${distDir}/list.json`, JSON.stringify(list))
   await Promise.all(
     list.map(async ({ slug }) => {
+      if (fs.pathExistsSync(`${distDir}/${slug}`)) {
+        await del(`${distDir}/${slug}`)
+      }
       await mkdirp(`${distDir}/${slug}`)
       return createContents(slug)
     }),

@@ -6,6 +6,7 @@ const parseMarkdown = require('./parseMarkdown')
 const pageSplitter = require('./pageSplitter')
 const baseDir = __dirname + '/../../talks'
 const { heading12, heading34 } = require('./markdown/regex')
+const getContentsList = require('./getContentsList')
 
 function getContents({ slug }) {
   const markdown = fs.readFileSync(`${baseDir}/${slug}/index.md`, 'utf-8')
@@ -19,13 +20,7 @@ function getContents({ slug }) {
 
 router.get('/list', (req, res) => {
   res.header('Content-Type', 'application/json; charset=utf-8')
-  try {
-    const talks = fs.readFileSync(`${baseDir}.json`)
-    res.send(talks)
-  } catch (e) {
-    const ret = fs.readdirSync(baseDir)
-    res.send(ret.map(slug => ({ slug, title: slug })))
-  }
+  res.send(getContentsList(baseDir))
 })
 
 router.get('/:slug', (req, res) => {

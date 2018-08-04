@@ -4,11 +4,22 @@ const frontmatter = require('frontmatter')
 const mdit = require('markdown-it')()
 const compact = require('lodash/compact')
 const flatten = require('lodash/flatten')
+const parseMarkdown = require('./mdServer/parseMarkdown')
+const pageSplitter = require('./mdServer/pageSplitter')
+
+function getContents({ slug }) {
+  const markdown = fs.readFileSync(`${baseDir}/${slug}/index.md`, 'utf-8')
+  const parsed = parseMarkdown(markdown)
+  const pages = pageSplitter(parsed.content)
+  return {
+    meta: parsed.meta,
+    pages,
+  }
+}
 
 function createPaths({ markdown, slug }) {
-  const parsed = frontmatter(markdown)
-  const rendered = mdit.render(parsed.content)
-  const pages = compact(rendered.split('<h2>')).map(content => `<h2>${content}`)
+  const parsed = parseMarkdown(markdown)
+  const pages = pageSplitter(parsed.content)
   const paths = pages.map((content, index) => `/${slug}/${index + 1}`)
   paths.unshift(`/${slug}`)
   return paths
