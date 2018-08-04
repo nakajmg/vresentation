@@ -19,10 +19,10 @@ export default {
     const contentsList = await request(filePath)
     return commit(types.SET_CONTENTS_LIST, contentsList)
   },
-  async [types.FETCH_CONTENT]({ commit }, { slug, page }) {
+  async [types.FETCH_CONTENT]({ commit }, { slug, page, isStatic }) {
     const filePath = baseURL(`/${slug}/${page}`)
     const cacheResponse = cache.get(filePath)
-    if (cacheResponse) return commit(types.SET_RESPONSE, cacheResponse)
+    if (cacheResponse && isStatic) return commit(types.SET_RESPONSE, cacheResponse)
     const response = await request(filePath)
     cache.set(filePath, response)
     return commit(types.SET_RESPONSE, response)

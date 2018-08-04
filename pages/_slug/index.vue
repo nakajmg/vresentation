@@ -7,11 +7,11 @@ import axios from 'axios'
 export default {
   name: 'Content',
   layout: 'Slide',
-  async fetch({ store, params }) {
+  async fetch({ store, params, isStatic }) {
     const { slug } = params
     const page = parseInt(params.page) || 0
     await store.dispatch(types.FETCH_HEADING, { slug })
-    await store.dispatch(types.FETCH_CONTENT, { slug, page })
+    await store.dispatch(types.FETCH_CONTENT, { slug, page, isStatic })
   },
   head() {
     return {
