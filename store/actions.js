@@ -1,5 +1,6 @@
 import types from './types'
 import request from '../modules/request'
+let es
 const baseURL = path => {
   let base, ext
   if (process.server) {
@@ -18,6 +19,18 @@ export default {
     const filePath = baseURL('/list')
     const contentsList = await request(filePath)
     return commit(types.SET_CONTENTS_LIST, contentsList)
+  },
+  async [types.WATCH_MARKDOWN]({ commit, state }) {
+    if (!es) {
+      es = new EventSource('/stream')
+      es.addEventListener('updated', async ({ data }) => {
+        const { slug } = JSON.parse(data)
+        if (slug !== state.slug) return
+        const filePath = baseURL(`/${state.slug}/${state.page}`)
+        const response = await request(filePath)
+        return commit(types.SET_RESPONSE, response)
+      })
+    }
   },
   async [types.FETCH_CONTENT]({ commit }, { slug, page, isStatic }) {
     const filePath = baseURL(`/${slug}/${page}`)

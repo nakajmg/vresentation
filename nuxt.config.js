@@ -34,7 +34,14 @@ module.exports = {
       }
     },
   },
-  plugins: [{ src: '~/plugins/router-sync' }, { src: '~/plugins/mousetrap', ssr: false }],
+  plugins: [
+    { src: '~/plugins/router-sync' },
+    { src: '~/plugins/mousetrap', ssr: false },
+    {
+      src: '~/plugins/watch',
+      ssr: false,
+    },
+  ],
   env: {
     baseURL: process.env.baseURL,
   },
