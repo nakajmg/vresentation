@@ -1,5 +1,7 @@
 const generateStaticPaths = require('./scripts/staticPaths')
 module.exports = {
+  rootDir: __dirname,
+  srcDir: __dirname,
   /*
   ** Headers of the page
   */
@@ -33,6 +35,7 @@ module.exports = {
         })
       }
     },
+    // dev: false,
   },
   plugins: [
     { src: '~/plugins/router-sync' },
@@ -50,4 +53,5 @@ module.exports = {
       return generateStaticPaths()
     },
   },
+  dev: false,
 }
